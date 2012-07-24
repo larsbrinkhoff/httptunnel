@@ -1,0 +1,66 @@
+.TH HTC 1
+.SH NAME
+htc \- httptunnel client
+.SH SYNOPSIS
+.B htc
+.I "[options] host[:port]"
+.SH "DESCRIPTION"
+This manual page briefly documents the
+.B htc
+command.
+.PP
+.B htc
+sets up a httptunnel connection to PORT at HOST (default port is 8888).
+When a connection is made, I/O is redirected from the source specified
+by the --device or --forward-port switch to the tunnel.
+.SH OPTIONS
+The program follows the usual GNU command line syntax, with long
+options starting with two dashes (`-').
+A summary of options are included below.
+.TP
+.B \-h, \-\-help
+Show summary of options.
+.TP
+.B \-c, \-\-content-length BYTES
+use HTTP PUT requests of BYTES size (k, M, and G postfixes recognized)
+.TP
+.B \-d, \-\-device DEVICE
+use DEVICE for input and output
+.TP
+.B \-F, \-\-forward\-port PORT
+use TCP port PORT for input and output
+.TP
+.B \-k, \-\-keep\-alive SECONDS
+send keepalive bytes every SECONDS seconds (default is 5)
+.TP
+.B \-M, \-\-max\-connection\-age SEC
+maximum time a connection will stay open is SEC seconds (default is 300)
+.TP
+.B \-S, \-\-strict\-content\-length
+always write Content-Length bytes in requests
+.TP
+.B \-A, \-\-proxy\-authorization USER:PASSWORD
+proxy authorization
+.TP
+.B \-\-proxy\-authorization\-file FILE
+proxy authorization file
+.TP
+.B \-B, \-\-proxy\-buffer\-size BYTES
+assume a proxy buffer size of BYTES bytes
+(k, M, and G postfixes recognized)
+.TP
+.B \-P, \-\-proxy HOSTNAME[:PORT]
+use a HTTP proxy (default port is 8080)
+.TP
+.B \-T, \-\-timeout TIME
+timeout, in milliseconds, before sending padding to a buffering proxy
+.TP
+.B \-U, \-\-user-agent STRING
+specify User-Agent value in HTTP requests
+.TP
+.B \-V, \-\-version
+output version information and exit
+
+.SH AUTHOR
+This manual page was contributed by Teemu Hukkanen <tjhukkan@iki.fi>,
+and was originally written for the Debian GNU/Linux system.

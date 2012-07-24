@@ -1,0 +1,29 @@
+Programming:		Lars Brinkhoff <lars@nocrew.org>
+Research:		Stefan Berndtsson <stefan@nocrew.org>
+			Magnus Lundström <logic@nocrew.org>
+Disclaimer:		Barak Pearlmutter <bap@cs.unm.edu>
+Documentation:		Teemu Hukkanen <tjhukkan@fishpool.fi>
+getopt_long usage:	Taken from the manual page.
+getopt_long code:	Taken from GNU fileutils-4.0.
+Patches:		Tomas Berndtsson <tomas@nocrew.org> (Solaris)
+			Andrew Gray <agray@cryogen.com> (Solaris, AIX)
+			Larry Gensch <larry.gensch@digital.com> (Digital UNIX)
+			John Bley <jbb6@acpub.duke.edu>
+			Andrew Mobbs <andrewm@chiark.greenend.org.uk>
+			Krishna	Swaroop <krishna@pnc.cmc.stph.net>
+			Philip Craig <philip@pobox.com> (Windows)
+			Jeffrey S Laing <lain@ns.jfl.com>
+			Ludovic Rousseau <rousseau@wallace.gemplus.fr>
+			Shimayoshi Takao <simayosi@img.sdl.melco.co.jp>
+			Chris Lesiak <clesiak@licor.com>
+			Albert Chin-A-Young <china@thewrittenword.com>
+			Raphael Manfredi <Raphael.Manfredi@st.com>
+			Fumitoshi UKAI <ukai@debian.or.jp>
+			Brian Somers <brian@Awfulhak.org>
+			Sampo Niskanen <sampo.niskanen@iki.fi>
+			Tim Phipps <Tim.Phipps@st.com>
+Testing:		Philip Craig <philip@pobox.com>
+FAQ:			Lars Brinkhoff <lars@nocrew.org>
+			Christian Brideau <cbrideau@newbridge.com>
+			Brian Schwarz <brian@bluecollartech.com>
+			... and many novice users.

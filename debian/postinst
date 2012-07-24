@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ "$1" = "configure" ]; then
+  if [ -d /usr/doc -a ! -e /usr/doc/httptunnel -a -d /usr/share/doc/httptunnel ]; then
+    ln -sf ../share/doc/httptunnel /usr/doc/httptunnel
+  fi
+fi

@@ -1,0 +1,14 @@
+Source: httptunnel
+Section: net
+Priority: optional
+Maintainer: Teemu Hukkanen <tjhukkan@iki.fi>
+Standards-Version: 3.1.0.0
+
+Package: httptunnel
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: Tunnels a data stream in HTTP requests.
+ Creates a bidirectional virtual data stream tunnelled in
+ HTTP requests. The requests can be sent via a HTTP proxy
+ if so desired.
+

@@ -1,0 +1,49 @@
+.TH HTS 1
+.SH NAME
+hts \- httptunnel server
+.SH SYNOPSIS
+.B hts
+.I "[options] [port]"
+.SH "DESCRIPTION"
+This manual page briefly documents the
+.BR hts
+command.
+.PP
+.B hts
+listens for incoming httptunnel connections at PORT (default port is 8888).
+When a connection is made, I/O is redirected to the destination specified
+by the --device or --forward-port switch.
+.SH OPTIONS
+The program follows the usual GNU command line syntax, with long
+options starting with two dashes (`-').
+A summary of options are included below.
+.TP
+.B \-h, \-\-help
+Show summary of options.
+.TP
+.B \-c, \-\-content-length BYTES
+use HTTP PUT requests of BYTES size (k, M, and G postfixes recognized)
+.TP
+.B \-d, \-\-device DEVICE
+use DEVICE for input and output
+.TP
+.B \-F, \-\-forward\-port HOST:PORT
+connect to PORT at HOST and use it for input and output
+.TP
+.B \-k, \-\-keep\-alive SECONDS
+send keepalive bytes every SECONDS seconds (default is 5)
+.TP
+.B \-M, \-\-max\-connection\-age SEC
+maximum time a connection will stay open is SEC seconds (default is 300)
+.TP
+.B \-S, \-\-strict\-content\-length
+always write Content-Length bytes in requests
+.TP
+.B \-V, \-\-version
+output version information and exit
+.TP
+.B \-p, \-\-pid\-file LOCATION
+write a PID file to LOCATION
+.SH AUTHOR
+This manual page was contributed by Teemu Hukkanen <tjhukkan@iki.fi>,
+and was originally written for the Debian GNU/Linux system.

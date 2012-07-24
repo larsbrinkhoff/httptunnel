@@ -1,0 +1,307 @@
+* Version 3.0
+
+Summary of user-visible changes since 2.0:
+
+** Bug fixes and improved stability.
+
+** Long options work on all platforms.
+
+   The GNU libc getopt_long() functions were copied into the httptunnel
+   distribution and is used on systems where no long options are available
+   in the standard libraries.
+
+** Logging messages get a time stamp.
+
+** httptunnel is now Debianized.
+
+** Replaced the MANUAL file with two man pages.
+
+** Made compatible with the Univeral TUN device driver.
+
+** New --strict-content-length option.
+
+   This option makes httptunnel obey the Content-Length field in the
+   HTTP header.  This improves compatibility with some proxies.  The
+   defalt is to be sloppy about the Content-Length field.
+
+** New --keep-alive option.
+
+   With this option, httptunnel will send keep-alive bytes, which
+   improves stability with some proxies.  The defailt is to send
+   keep-alive bytes every five seconds.
+
+** New --max-connection-age option.
+
+   This option specifies the maximum age of any HTTP connection made
+   by httptunnel.  The default is 300 seconds.
+
+** New --proxy-authorization option.
+
+   This option is used to send a authorization string to the proxy.
+
+** New --proxy-authorization-file option.
+
+   This option works as --proxy-authorization, only it reads the
+   string from the specified file.
+
+** New --pid-file option.
+
+   With this option, httptunnel will write its process identification
+   number to the specified file.
+
+** New --user-agent option.
+
+   Use this option to specify a string for the User-Agent field sent
+   in HTTP headers.  This is useful for proxies that want a specific
+   value there.
+
+* Version 2.0
+
+Summary of user-visible changes since 1.0:
+
+** There is a FAQ.
+
+** There is a MANUAL which isn't.
+
+** Port numbers have default values.
+
+** There is a debug mode.
+
+   Using --enable-debug with 'configure' will make htc and hts recognize
+   --debug and --logfile options.
+
+** Uses syslog.
+
+   When not in debug mode, important events and unexpected errors
+   are logged using LOG_NOTICE and LOG_ERROR, respectively.
+
+** hts takes a --content-length option.
+
+   It works like the one for htc.
+
+** Short option for --forward-port changed from -f to -F.
+
+** Improved portability.
+
+   Works on at least some versions of GNU/Linux, Solaris, AIX,
+   Digital UNIX, Cygwin, FreeBSD, OpenBSD.
+
+** Improved protocol and HTTP handling.
+
+   Resulting in better stability.
+
+** Bug fixes.
+
+** Bug reports should now go to bug-httptunnel@nocrew.org.
+
+* Version 1.103
+
+** Bug reporting email addres changed to bug-httptunnel@gnu.org.
+
+** Miscellaneous cosmetic stuff.
+
+* Version 1.102
+
+** Emulate endprotoent() if not present.
+
+** Changed email addresses to preferred ones.
+
+** Handle setsockopt() errors slightly more gracefully.
+
+* Version 1.101
+
+** Disabled compilation of tt and rw, as they are hardly needed anymore.
+
+** Changed internal parameters once again.
+
+   Send keep-alive bytes ever 5 seconds.
+
+   Maximum connection time back to 5 minutes.
+
+** Improved logging.
+
+   Write package name, package version and debug level to log.
+
+   Removed one superfluous level of indentation.
+
+** Removed a problem which caused a busy loop.
+
+   This only happened when --proxy-buffer-* was active.
+
+* Version 1.100
+
+** Removed an attempt to printf() NULL, which caused a crash on Solaris.
+
+   Thanks to Tomas Berndtsson <tomas@nocrew.org> for the fix.
+
+** Hopefully the setsockopt() errors will be gone.
+
+** Changed some internal parameters to satisfy really picky proxies.
+
+   Increased frequency of keep-alive bytes from 1/30s to 1/10s.
+
+   Decreased maximum connection time from 5 minutes to 1 minute.
+
+   TODO: user interface for these parameters.
+
+* Version 1.99
+
+** Added plea for post cards to README.
+
+   The greedy author tries to turn this otherwise perfectly free
+   software into a vehicle for extracting post cards from innocent
+   users.
+
+** Fixed --enable-debug without --debug bug.
+
+** Adjusted debugging levels.
+
+   0 now means no debugging messages, 5 is the highest level.
+
+* Version 1.98
+
+** Close a HTTP POST connection after 5 minutes.
+
+   This is a kludge, but finally no data is lost with Squid 2.
+
+** httptunnel is now GNU software.
+
+** Changed the short option for --forward-port from -f to -F.
+
+   Because I want to use -f for a future --file option.
+
+** Removed some possible buffer overflows.
+
+* Version 1.97
+
+** Improved poll() emulation.
+
+** Improved HTTP request and response parsing.
+
+** hts --content-length works now.
+
+   Thanks Philip!
+
+** Try some setsockopt() settings to make connections more reliable.
+
+* Version 1.96
+
+** Changed compiler warnings when --enable-debug.
+
+** Included the HTTP RFCs in the distribution.
+
+** Emulate poll() using select() on systems without poll().
+
+   Still untested, though.
+
+** Fixed void * arithmetic and a prototype/definition mismatch.
+
+   Thanks to Larry Gensch for this patch!
+
+* Version 1.95
+
+** I/O byte counters.
+
+   --debug 3 will show byte counters for the data sent and recieived.
+   --debug 4 will also show byte counters for the raw protocol data
+   sent and received.
+
+** hts takes a --content-length switch.
+
+** Make sure HTTP GET responses are not cached.
+
+   Added "Expires: 0" (invalid HTTP, I know) and "Cache-Control:
+   no-store, must-revalidate" to HTTP GET response header.
+
+* Version 1.94
+
+** Avoid a few compilation warnings.
+
+** http.h didn't make it into the distribution.
+
+* Version 1.93
+
+** Parse HTTP GET responses.
+
+   If the version is unknown or the status code signals an error, fail.
+
+* Version 1.92
+
+** Forgot to regenerate configure, Makefile, etc.
+
+* Version 1.91
+
+** Forgot to update NEWS before releasing 1.90.
+
+* Version 1.90
+
+** More robust.
+
+** Major protocol change.
+
+   Now uses the protocol for HTTP GET requests too.
+
+** Improved error logging.
+
+** Solaris and AIX fixes.
+
+   Thanks to Andrew Gray for the patch.
+
+** Send keep-alive bytes every 30 seconds of inactivity.
+
+* Version 1.5
+
+** New --logfile switch.
+
+** Uses syslog.
+
+* Version 1.4
+
+** Works with Squid 2.
+
+** Solaris fixed.
+
+   And this time, they're actually tested!  Thanks to Tomas Berndtsson
+   for supplying these fixes.
+
+* Version 1.3
+
+** Fixes for addr_inet() and systems without getopt_long().
+
+   Thanks to sgback@nety.yeungnam.ac.kr for the bug report.
+
+* Version 1.2
+
+** 'configure' checks whether socklen_t is declared or not.
+
+   This should make httptunnel compile on older libc's.
+   Thanks to Tomas Almlof and J A for reporting this bug.
+
+** Not specifying a proxy doesn't give a usage error any more.
+
+   Thanks to George Bonser for reporting this bug.
+
+* Version 1.1
+
+** 'configure' takes a --enable-debug switch.
+
+   Use it to enable debugging code.
+
+** 'htc' and 'hts' take a --debug switch.
+
+   Use it to enable debugging mode.
+
+** Some arguments on the command line of 'hts' and 'htc' don't need to
+   be specified with port numbers.
+
+   If unspecified, a default port number is used.  Use --help to see
+   where this applies.
+
+** Removed annoying buffering bug.
+
+   So no fake --proxy-buffer-size and --proxy-buffer-timeout is needed
+   any more.
+
+* Version 1.0
+
+** First public release.

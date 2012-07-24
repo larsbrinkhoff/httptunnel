@@ -1,0 +1,63 @@
+httptunnel (3.2) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Teemu Hukkanen <tjhukkan@iki.fi>  Thu, 31 Aug 2000 08:03:42 +0300
+
+httptunnel (3.1-1) unstable; urgency=low
+
+  * New upstream version. (Closes: #67354)
+
+ -- Teemu Hukkanen <tjhukkan@iki.fi>  Wed, 26 Jul 2000 10:59:41 +0300
+
+httptunnel (3.0.3-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Teemu Hukkanen <tjhukkan@iki.fi>  Sun, 23 Jul 2000 03:52:55 +0300
+
+httptunnel (3.0.2) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Teemu Hukkanen <tjhukkan@iki.fi>  Wed, 14 Jun 2000 22:49:02 +0300
+
+httptunnel (3.0) unstable; urgency=low
+
+  * A stable release created from the development branch. Upstream
+  changes from the previous debian packaged version include two
+  patches, fixing TUN driver compatibility and poll() emulation.
+  Essentially this is the same version as 2.11-2.
+  * Cleaned up the build scripts quite a bit.
+
+ -- Teemu Hukkanen <tjhukkan@iki.fi>  Wed, 12 Jan 2000 20:09:04 +0200
+
+httptunnel (2.11-2) unstable; urgency=low
+
+  * New upstream version from CVS
+  * FHS transition
+
+ -- Teemu Hukkanen <tjhukkan@iki.fi>  Wed, 27 Oct 1999 10:52:18 +0300
+
+httptunnel (2.11-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Teemu Hukkanen <tjhukkan@iki.fi>  Tue, 24 Aug 1999 13:28:54 +0300
+
+httptunnel (2.10-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Teemu Hukkanen <tjhukkan@iki.fi>  Sat, 14 Aug 1999 00:29:55 +0300
+
+httptunnel (2.8-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Teemu Hukkanen <tjhukkan@iki.fi>  Thu, 12 Aug 1999 11:56:17 +0300
+
+Local variables:
+mode: debian-changelog
+add-log-mailing-address: "tjhukkan@iki.fi"
+End:

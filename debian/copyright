@@ -1,0 +1,21 @@
+This package was debianized by Teemu Hukkanen <tjhukkan@iki.fi> on
+Wed, 28 Jul 1999 16:00:06 +0300.
+
+It was downloaded from <ftp://ftp.gnu.org/pub/httptunnel/>
+
+Upstream Author(s): Lars Brinkhoff <lars@nocrew.org>
+
+Copyright:
+ httptunnel is licensed under the GNU General Public License.
+
+---
+httptunnel is free software.  See COPYING for terms and conditions.
+If you like it, I would appreciate if you sent a post card to:
+        Lars Brinkhoff
+	Kopmansgatan 2
+        411 13  Goteborg
+        Sweden
+---
+
+A copy of the GNU General Public License is available on Debian 
+GNU/Linux systems as /usr/share/common-license/GPL.

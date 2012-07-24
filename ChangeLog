@@ -1,0 +1,1002 @@
+2003-01-10  Lars Brinkhoff  <lars@nocrew.org>
+
+	From Marco Michelino <michelinux@tin.it>:
+	* hts.c (usage, parse_arguments, main): add --chroot and --user
+	options.
+	
+2001-06-12  lars brinkhoff  <lars@nocrew.org>
+
+	* tunnel.h: Improved documentation for tunnel programming
+	inteface.
+
+2001-05-10  lars brinkhoff  <lars@nocrew.org>
+
+	* common.c (log_level): Where possible, use fputs and fputc
+	instead of fprintf.
+
+2001-03-30  lars brinkhoff  <lars@nocrew.org>
+
+	From Tim Phipps <Tim.Phipps@st.com>:
+	* hts.c (parse_arguments): --debug argument is required, not
+	optional.
+
+2001-02-25  lars brinkhoff  <lars@nocrew.org>
+
+	From Sampo Niskanen <sampo.niskanen@iki.fi>:
+	* common.c (handle_tunnel_input): write to stdout if fd = 0.
+	* htc.c (struct Arguments): add use_std and use_daemon.
+	(usage): add short option -z for --proxy-authorization-file.
+	add -s, --stdin-stdout option.  add -w, --no-daemon option.
+	(parse_arguments): recognize new options.
+	(parse_arguments): write diagnostics to stderr instead of stdout.
+	(main): likewise.
+	* hts.c (struct Arguments): add use_std and use_daemon.
+	(usage): add -s, --stdin-stdout option.  add -w, --no-daemon option.
+	(parse_arguments): recognize new options.
+	(main): write diagnostics to stderr instead of stdout.
+
+2000-09-01  lars brinkhoff  <lars@nocrew.org>
+
+	From Brian Somers <brian@Awfulhak.org>:
+
+	* htc.c (main): correct typo in log message.
+	* tunnel.c (tunnel_out_connect): use ntohl() to convert IP address.
+	(tunnel_accept): likewise.
+	* common.c (set_address): likewise.
+
+2000-08-31  lars brinkhoff  <lars@nocrew.org>
+
+	* configure.in: version 3.2
+	* debian/changelog: sync with new version.
+
+	From Brian Somers <brian@Awfulhak.org>:
+
+	* tunnel.c (tunnel_new_server): change inet_aton() to the more
+	generally available inet_addr().
+
+2000-07-25  lars brinkhoff  <lars@nocrew.org>
+
+	* configure.in: version 3.1
+	* debian/changelog: sync with new version.
+
+	From Brian Somers <brian@Awfulhak.org>:
+
+	* tunnel.h: update tunnel_new_server prototype.
+
+	* tunnel.c (tunnel_is_server): tunnel is server when
+	server_socket != -1.
+	(tunnel_out_connect): log the port number.
+	(tunnel_in_connect): don't call http_destroy_response with
+	NULL argument.
+	(tunnel_accept): log client IP number and port.
+	(tunnel_new_server): accept char *host argument, which is used
+	to bind the server to a specific network interface.  initialize
+	tunnel->bytes to 0.  pass struct in_addr to server_socket.
+	(tunnel_new_client): initialize tunnel->bytes to 0.
+
+	* hts.c (parse_arguments): host defaults to NULL.  recognize
+	[HOST:]PORT syntax.
+	(main): log host:port, if host was specified.  pass host to
+	tunnel_new_server.
+
+	* common.c (server_socket): take a sockaddr_in * argument; improve
+	sockaddr_in initialization.
+	(set_address): improve sockaddr_in initialization.
+	
+	* common.h: update server_socks prototype.
+	
+	* htc.c (main): pass a struct in_addr to server_socket.
+
+2000-07-24  lars brinkhoff  <lars@nocrew.org>
+	
+	From Fumitoshi UKAI <ukai@debian.or.jp>:
+	* common.c (handle_device_input): set errno to EIO on error.
+	(handle_tunnel_input): likewise.
+
+2000-07-12  lars brinkhoff  <lars@nocrew.org>
+
+	From Jonathan Buschmann <Jonathan.Buschmann@icn.siemens.it>:
+	* tunnel.c: include <netinet/tcp.h> to get definition of
+	TCP_NODELAY.
+
+2000-07-11  lars brinkhoff  <lars@nocrew.org>
+
+	* configure.in: version 3.0.3.
+
+2000-07-10  lars brinkhoff  <lars@nocrew.org>
+
+	* http.c (http_method): add random string to HTTP requests, in
+	order to work with proxies that doesn't recognize "no-cache" etc.
+	Thanks to Rogier R. Mulhuijzen <drwilco@drwilco.nl> for the
+	suggestion.
+	
+2000-07-04  lars brinkhoff  <lars@nocrew.org>
+
+	* htc.c (parse_arguments): fix spelling of "authorization".
+
+2000-06-30  lars brinkhoff  <lars@nocrew.org>
+
+	* port/Makefile.am (libport_a_SOURCES): change getopt_.h to getopt.h.
+
+2000-06-29  lars brinkhoff  <lars@nocrew.org>
+	
+	From Albert Chin-A-Young <china@thewrittenword.com>:
+	* port/getopt_.h: rename to port/getopt.h
+	* port/getopt.c: include getopt.h instead of getopt_.h.
+	* port/getopt1.c: likewise.
+	* common.h: likewise.
+
+	Myself:
+	* configure.in: remove checks for getopt.h, getopt(), and
+	getopt_long().
+	* common.h: remove HAVE_GETOPT check.
+
+2000-06-22  lars brinkhoff  <lars@nocrew.org>
+
+	* htc.c (parse_arguments): correct typo of "proxy-authorization-file".
+	(parse_arguments): remove terminating CRLF or LF from auth file.
+	Thanks to Raphael Manfredi <Raphael.Manfredi@st.com> for this patch.
+
+	* configure.in: version 3.0.2.
+	* debian/changelog: sync with new version.
+
+2000-06-14  lars brinkhoff  <lars@nocrew.org>
+
+	* configure.in: version 3.0.1.
+
+2000-01-13  lars brinkhoff  <lars@nocrew.org>
+
+	* configure.in: from Albert Chin-A-Young
+	<china@thewrittenword.com>: A better way to check if -lnsl and
+	-lsocket should be used. Even though some systems have -lnsl and
+	-lsocket, it doesn't imply they should be used (i.e. IRIX).
+
+2000-01-12  lars brinkhoff  <lars@nocrew.org>
+
+	* configure.in: version 3.0.
+
+	* NEWS: updated with user-visible changes since 2.0.
+
+1999-12-22  lars brinkhoff  <lars@nocrew.org>
+
+	* cvs tag release_2_90
+	
+	* configure.in: version 2.90.
+
+1999-12-15  lars brinkhoff  <lars@nocrew.org>
+
+	* common.c (open_device): from Chris Lesiak <clesiak@licor.com>:
+	The following patch allows httptunnel to work with devices
+	that aren't ttys.  Specifically, the Universal TUN device driver
+        version	0.3 by Maxim Krasnyansky <max_mk@yahoo.com>
+	patch to linux-2.2.12 seems to work fine.
+
+1999-12-07  lars brinkhoff  <lars@nocrew.org>
+
+	* port/poll.c (poll): patch from Shimayoshi Takao
+	<simayosi@img.sdl.melco.co.jp> fixed bug in poll() emulation.
+
+1999-10-25  lars brinkhoff  <lars@nocrew.org>
+
+	* htc.c (parse_arguments): 
+	* tunnel.c (tunnel_write_request): patch from Ludovic Rousseau
+	<rousseau@wallace.gemplus.fr> to make --strict-content-length work.
+	
+1999-08-24  lars brinkhoff  <lars@nocrew.org>
+
+	* cvs tag release_2_11
+	
+	* configure.in: version 2.11.
+
+	* tunnel.c (tunnel_read): return -1 if tunnel_read_request
+	returns 0.
+	(tunnel_read_request): return 1 on success.
+	(tunnel_read_request): set errno when returning 0.
+
+1999-08-21  lars brinkhoff  <lars@nocrew.org>
+
+	* tunnel.c (tunnel_read_request): added logging of request header.
+
+1999-08-18  lars brinkhoff  <lars@nocrew.org>
+
+	* tunnel.c (tunnel_in_connect): improve error logging.
+	(tunnel_connect): return -1 if tunnel_in_connect() returns 0.
+
+	* TODO: added new idea from Raphael Manfredi.
+
+	* htc.c (usage, parse_arguments): recognize
+	--proxy-authorization-file.  Thanks to Raphael Manfredi
+	<Raphael.Manfredi@st.com> for suggesting this feature.
+
+1999-08-16  lars brinkhoff  <lars@nocrew.org>
+
+	* configure.in: version 2.10.cvs.
+
+	* cvs tag release_2_10
+	
+	* configure.in: version 2.10.  (apparently 2.9 got lost)
+
+	* tunnel.c (tunnel_out_connect): 
+	* tunnel.c (tunnel_in_connect): 
+	don't use shutdown() (unless USE_SHUTDOWN is defined).
+
+	* tunnel.c (tunnel_out_setsockopts): prefer using TCP_NODELAY
+	to SO_SNDBUF.
+
+	Thanks to Raphael Manfredi <Raphael_Manfredi@pobox.com> for
+	pointing out the problems with using shutdown() and SO_SNDBUF.
+
+1999-08-13  lars brinkhoff  <lars@nocrew.org>
+
+	* htc.c (main): don't null-terminate the base64 string, since
+	encode_base64() does it.  use strcopy and strcat instead of
+	snprintf.
+
+	* base64.c (encode_base64): null-terminate the encoded string.
+
+	* htc.c (main): use the length value returned by encode_base64()
+	and null-terminate the base64-encoded string before using it with
+	snprintf.  Thanks to James Fidell <james@cloud9.co.uk> for
+	reporting this bug.
+	
+	* base64.c (encode_base64): allocate one more byte for the
+	result string, in case someone wants to null-terminate it.
+
+1999-08-12  lars brinkhoff  <lars@nocrew.org>
+
+	* configure.in: version 2.8.cvs.
+
+	* cvs tag release_2_8
+	
+	* configure.in: version 2.8.
+
+	* Makefile.am (EXTRA_DIST): forgot to include the debian files.
+
+1999-08-10  lars brinkhoff  <lars@nocrew.org>
+
+	* cvs tag release_2_7
+
+1999-08-06  lars brinkhoff  <lars@nocrew.org>
+
+	* configure.in: version 2.7.
+
+1999-08-05  lars brinkhoff  <lars@nocrew.org>
+
+	* hts.1, htc.1: moved debian/hts.1 to top level and added htc.1.
+	Both manuals contributed by Teemu Hukkanen <tjhukkan@iki.fi>.
+	
+	* debian/changelog, debian/copyright, debian/dirs, debian/docs,
+	debian/hts.1, debian/rules, debian/control: Debian files
+	contributed by Teemu Hukkanen <tjhukkan@iki.fi>.
+	
+1999-06-28  lars brinkhoff  <lars@nocrew.org>
+
+	* port/stdio_.h: #include <sys/types.h> and "config.h" to make sure
+	size_t is defined before it is used.  Thanks to Barry Hunter Priest
+	<hunter@panix.com> for reporting this bug.
+
+1999-06-09  lars brinkhoff  <lars@nocrew.org>
+
+	* tunnel.c (tunnel_opt): bug fix from Jeffrey S Laing
+	<laing@ns.jfl.com>.
+
+Wed May 26 08:15:54 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* tunnel.c (tunnel_read_request): don't try to read any
+	data field if the length field of the request is 0.
+
+Tue May 18 21:18:28 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* cvs tag release_2_6
+	
+	* http.c (http_parse_response): allocates a Http_response
+	(http_parse_request): allocates a Http_request.
+
+	* configure.in: version 2.6.
+
+Sun May  9 12:10:45 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* cvs tag release_2_5
+
+	* htc.c (main): added forgotten arguments to initial
+	"started with arguments" log message.
+
+	Thanks to Philip Craig <philip@pobox.com> for this patch:
+	* port/syslog_.h: corrected vsyslog() prototype.
+	* hts.c (parse_arguments):  added forgotten -k option.
+	* htc.c (usage): fixed spelling.
+	(parse_arguments): added forgotten -k option.
+	* renamed all port/Foo.h files into port/foo_.h.
+
+1999-05-08  lars brinkhoff  <lars@nocrew.org>
+
+	* configure.in: version 2.5.
+
+	* cvs tag release_2_4
+
+	* htc.c (usage, parse_arguments): new -U, --user-agent option.
+	(main): call tunnel_setopt to set "user_agent" option.
+	* tunnel.c (tunnel_opt): recognize "user_agent" option.
+	* http.c (http_method): add User-Agent header if specified.
+
+	* http.c (http_method_to_string): new function.
+	(http_alloc_header): new function.
+	(http_add_header): new function.
+	(http_write_header): new function.
+	(http_allocate_response): new function.
+	(http_create_response): new function.
+	(http_allocate_request): new function.
+	(http_create_request): new function.
+	(http_write_request): new function.
+	(http_method): call http_create_request, http_add_header, and
+	http_write_request.
+
+1999-04-24  lars brinkhoff  <lars@nocrew.org>
+
+	* hts.c (main): not specifying a pid file resulted in
+	a crash on some operating systems.  Thanks to Krishna
+	Swaroop <krishna@pnc.cmc.stph.net>.
+	* configure.in: version 2.4.
+
+Tue Apr 13 22:15:24 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* cvs tag release_2_3
+	
+	* hts.c (main, parse_arguments): add --pid-file option.
+	Thanks to Andrew Mobbs <andrewm@chiark.greenend.org.uk>.
+
+1999-04-04  lars brinkhoff  <lars@nocrew.org>
+
+	* configure.in: check for syslog().
+	* port/vsyslog.c (syslog): new function.  If config.h defines
+	neither HAVE_SYSLOG nor HAVE_VSYSLOG, logging will be disabled.
+
+1999-04-02  lars brinkhoff  <lars@nocrew.org>
+
+	* htc.c (main): --proxy-authorization fix.
+
+	* configure.in: version 2.3.
+
+	* cvs tag release_2_2
+	* configure.in: version 2.2
+
+	* port/vsnprintf.c (snprintf): new function.
+
+	* htc.c (main): set proxy_authorization option on tunnel.
+	(Arguments): new proxy_authorization variable.
+	(usage, parse_arguments): new --proxy-authorization option.
+	* http.c (http_method): add Proxy-Authorization to header.
+	* http.h (Http_destination): new proxy_authorization variable.
+	* tunnel.c (tunnel_opt): recognizes the "proxy_authorization" option.
+
+	* tunnel.c (tunnel_getopt): removed len argument.
+
+	* Makefile.am (EXTRA_DIST): add doc/rfc2045.txt.
+	(htc_SOURCES): add base64.c.
+	(noinst_SOURCES): add base64.h.
+	* base64.c (encode_base64): new function.
+
+Fri Mar 26 10:22:07 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* README: added reference to MANUAL.
+	* MANUAL: added reference to Firewall Piercing mini-HOTWO.
+
+Thu Mar 25 09:14:04 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* http.c (parse_header): missed one allocation check.
+	Thanks to John Bley <jbb6@acpub.duke.edu> for this patch.
+
+Wed Mar 24 16:36:26 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* cvs tag release_2_1
+	
+	* FAQ: added HP-UX question.
+
+Mon Mar 22 18:51:10 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* tunnel.c (tunnel_opt): new function.
+	(tunnel_getopt, tunnel_setopt): use tunnel_opt.
+	(tunnel_opt): new options keep_alive and max_connection_age.
+	(struct tunnel): new variables keep_alive and max_connection_age.
+	(tunnel_write_request): close connection if it's older than
+ 	max_connection_age seconds.
+	* htc.c, hts.c (main): send keepalive byte after arg.keep_alive
+	seconds of inactivity.
+	* htc.c, hts.c (usage, parse_arguments, main): new options
+	--keep-alive and --max-connection-age.
+
+Sat Mar 20 06:51:35 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* tunnel.c (tunnel_write_request): write padding before closing
+	old connection if strict_content_length is set.
+	(tunnel_close): don't write padding unless strict_content_length
+	is set.
+	(struct tunnel): new strict_content_length variable.
+	(tunnel_setopt, tunnel_getopt): new functions.
+	* htc.c, hts.c (Arguments, parse_arguments): new --strict option.
+
+	* common.c (log_level): time stamps in debug messages.
+
+	* port/vsnprintf.c (vsnprintf, vsmprintf): new functions.
+	* configure.in: check for vsnprintf.
+	* port/vsyslog.c: use vsnprintf instead of vsprintf.
+
+	* configure.in: changed name from DEBUG to DEBUG_MODE.
+	changed all other files accordingly.
+
+	* common.c (log_exit): new function.
+	* htc.c, hts.c: use log_exit instead of exit.
+
+	* rw.c, tt.c: removed.
+	* Makefile.am: removed references to rw and tt.
+	
+	* port/getopt.c, port/getopt1.c, port/getopt.h: copied from
+	GNU fileutils-4.0.
+	* port/endprotoent.c, port/Netdb.h, port/poll.c, port/sys/Poll.h,
+	port/vsyslog.c, port/Syslog.h, port/endprotoent.h, port/Netdb.h,
+	port/vsnprintf.c, port/Stdio.h, port/daemon.c, port/Unistd.h:
+	new files.
+	* common.c, common.h, tunnel.c: removed poll(), vsyslog(),
+	endprotoent(), daemon().
+	* modified all old files to use the new files.
+
+	* configure.in: version 2.1.
+
+	* cvs tag release_2_0
+	* Makefile.am (EXTRA_DIST): added FAQ.
+	* FAQ: new file.
+	* NEWS: updated for version 2.0.
+	* configure.in: version 2.0.
+
+Fri Mar 19 12:32:44 1999  lars brinkhoff  <lars@nocrew.org>
+	
+	* NEWS: updated for version 1.103.
+	
+	* acinclude.m4 (HTTPTUNNEL_DEFINE_INADDR_NONE): #include <sys/types.h>
+	in test to make it work on OpenBSD.
+
+	* TODO: some new stuff.
+
+Wed Mar 17 07:08:53 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* hts.c (main): forgot return type int!
+
+	* htc.c, hts.c (main): improve a command line error message.
+
+	* common.h (BUG_REPORT_EMAIL): email bugs to
+	bug-httptunnel@gnu.org.
+
+	* configure.in: version 1.103.
+
+	* cvs tag release_1_102
+	* NEWS: updated for version 1.102.
+
+	* configure.in: stricter warnings when --enable-debug.
+	common.c, common.h, hts.c, http.c, tunnel.c: changes
+	to remove compiler warnings.
+
+	* tunnel.c (tunnel_out_setsockopts, tunnel_in_setsockopts):
+	don't return an error when the first setsockopt() fails.
+	also changed from log_error to log_debug, because errors
+	can be ignored.
+
+Tue Mar 16 15:28:07 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* AUTHORS: changed email addresses to the preferred ones.
+
+	* configure.in: add check for endprotoent().
+	* tunnel.c (endprotoent) [!HAVE_ENDPROTOENT]: define
+	dummy emulation function (Cygwin B20 didn't have it).
+
+	* AUTHORS: Added Philip Craig to Testing section.
+
+	* configure.in: version 1.102.
+
+	* cvs tag release_1_101
+	
+	* NEWS: updated for version 1.101.
+	
+	* htc.c (main): removed problem which caused a busy loop.
+
+	* common.c (log_level): removed one level of indentation.
+
+	* hts.c, htc.c (main): log_notice PACKAGE, VERSION, and
+	debug_level.
+
+	* tunnel.h (DEFAULT_CONNECTION_MAX_TIME): 5 minutes seems
+	good enough.
+
+	* common.h (DEFAULT_KEEP_ALIVE): 5 seconds seems to satisfy
+	a very very picky proxy.
+
+	* Makefile.am: disabled compilation of tt and rw, as they are
+	hardly needed anymore.
+
+	* configure.in: version 1.101.
+
+	* cvs tag release_1_100.
+	
+	* NEWS: updated for version 1.100.
+
+	* Makefile.am (EXTRA_DIST): added MANUAL (but it's not).
+
+	* tunnel.h (DEFAULT_CONNECTION_MAX_TIME): default maximum time
+	a HTTP POST connection will stay open.
+
+	* common.h (DEFAULT_KEEP_ALIVE): default period for sending
+	keep-alive bytes.
+
+	* configure.in: version 1.100.
+
+	* tunnel.c (tunnel_out_setsockopts): set SO_SNDLOWAT at
+	TCP level instead of SOL_SOCKET level.
+	(tunnel_in_setsockopts): set SO_RCVLOWAT at
+	TCP level instead of SOL_SOCKET level.
+	(get_proto_number): new function.
+
+Tue Mar 16 14:25:01 1999  Tomas Berndtsson  <tomas@nocrew.org>
+
+	* tunnel.c (tunnel_new_client): fixed string printing when the
+ 	proxy string is NULL, so it doesn't segfault on Solaris.
+
+Mon Mar 15 18:24:11 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* cvs tag release_1_99
+	
+	* NEWS: updated for 1.99.
+	
+	* MANUAL: added, but isn't.
+
+Sun Mar 14 05:04:44 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* TODO: added idea for --paranoid switch.
+
+	* README: added plea for post cards.  improved the example.
+
+	* common.c (log_notice, log_error, log_debug, log_verbose,
+	log_annoying): adjusted the debug level so that 0 means no
+	debug messages at all.  5 is now the highest level.
+
+	* hts.c, htc.c (main): not specifying a debug level when
+ 	--enable-debug caused a crash.
+	
+	* configure.in: version 1.99.
+
+	* cvs tag release_1_98
+	
+	* NEWS: updated for version 1.98.
+
+Sat Mar 13 09:31:00 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* http.c: changed read_until to return malloced string
+	and changed other functions accordingly.
+
+	* configure.in: version 1.98.
+
+	* tunnel.c (tunnel_write_request, tunnel_write): moved the
+	code that closes old connections from tunnel_write to
+	tunnel_write_request.
+
+	* htc.c (usage, parse_arguments): changed -f to -F.
+
+	* hts.c (usage, parse_arguments): changed -f to -F.
+
+	* httptunnel is now GNU software.
+
+	* common.c (server_socket): setsockopt SO_REUSEADDR on server
+	sockets.  Idea from Magnus Lundström's mailtunnel.
+
+Fri Mar 12 19:05:22 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* tunnel.c (tunnel_out_connect): note time when connection was made.
+	(tunnel_write): close connection if it's old.
+
+	* tunnel.c (tunnel_in_setsockopts, tunnel_out_setsockopts):
+	new functions.
+	(tunnel_accept): call tunnel_{in,out}_setsockopts.
+	(tunnel_in_connect): call tunnel_in_setsockopts.
+	(tunnel_out_connect): call tunnel_out_setsockopts.
+
+Thu Mar 11 12:12:14 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* cvs tag release_1_97
+	
+	* NEWS: updated for 1.97.
+
+	* tunnel.c (tunnel_accept): set the send buffer size of the
+	outgoing socket to 0.  set SO_KEEPALIVE option too.
+	(tunnel_close): reset I/O counters.
+
+	* HACKING: removed unneccesary reference no non-free software.
+
+	* common.c (poll): slight improvement after having looked at
+	the poll emulation code by Sean Reifschneider <jafo@tummy.com>.
+
+Wed Mar 10 22:16:40 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* tunnel.c (tunnel_accept): call http_destroy_request.
+	(tunnel_in_connect): call http_destroy_response.
+
+	* http.c (http_destroy_response, http_destroy_request): 
+	new functions.
+
+Tue Mar  9 11:40:16 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* tunnel.c (tunnel_accept): use http_parse_request().
+
+	* http.c (parse_header, http_parse_response, http_header_value,
+		 http_parse_request): don't use dynamic memory allocation
+		 #ifdef DONT_MALLOC.
+
+	* configure.in: removed "[=verbose]" from --enable-debug
+	help output.  added -Wpointer-arith to CFLAGS when not
+	--enable-debug.
+
+	* tunnel.c (tunnel_write_request): maybe fixed bug that caused
+	lost HTTP POST connections to corrupt data.  (Nope, didn't work.)
+
+	* hts.c (parse_arguments): forgot to add "c:" to short_options to
+	make --content-length work.  Thanks to Philip Craig for this one.
+
+Mon Mar  8 18:42:01 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* http.c (parse_header, http_parse_request, http_header_value):
+	new functions.
+	(parse_response): improved to parse header.
+
+	* http.h (Http_method, Http_header, Http_request, Http_response):
+	added new types to describe the HTTP protocol.  Improved Http_response.
+
+	* common.c (poll): block indefinitely when using a negative timeout
+	value.
+
+	* configure.in: version 1.97.
+
+	* cvs tag release_1_96
+	
+	* NEWS: updated for 1.96.
+
+	* configure.in: add -Wno-unused and -Wpointer-arith to CFLAGS
+	if --enable-debug.
+
+	* AUTHORS: added Andrew Gray and Larry Gensch.
+
+	Thanks to Larry Gensch at Digital for this patch:
+	* tunnel.c (tunnel_write_or_padding): fixed void * arithmetic.
+	* common.h (write_all, read_all): fixed void * arithetic.
+	* tunnel.h (tunnel_padding): fixed prototype/definition mismatch.
+
+Sun Mar  7 11:17:48 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* common.c (poll): emulate poll() using select().
+
+	* configure.in: check for poll() and <sys/poll.h>.
+
+	* Makefile.am (EXTRA_DIST): add doc/rfc*.txt.
+
+	* configure.in: version 1.96
+
+	* cvs tag release_1_95
+
+	* NEWS: updated for 1.95.
+	
+	* tunnel.c (tunnel_accept): add "Expires: 0" and "Cache-Control:
+	no-store, must-revalidate" to HTTP GET response.
+
+	* htc.c, hts.c (main): ignore SIGPIPE unless --enable-debug.
+
+	* common.c (log_sigpipe): new function replacing sigpipe()
+	in htc.c and hts.c.
+
+	* tunnel.c: don't include HTTP header stuff in the I/O counters
+	unless #define IO_COUNT_HTTP_HEADER.
+	
+	* tunnel.c (tunnel_accept): add Content-Length to HTTP GET
+	response.
+	(parse_header): return number of bytes read.
+
+	* hts.c (usage, parse_arguments, main): accept new switch
+	--content-length.
+
+	* common.c (atoi_with_postfix): moved here from htc.c.
+
+	* http.c (http_method, http_get, http_put, http_post): return
+	number of bytes written.
+	(http_parse_response): return number of bytes read.
+
+	* tunnel.c (struct tunnel): add counters for total number
+	of bytes read and written for both data and raw I/O.
+	(tunnel_out_connect): increase out_total_raw.
+	(tunnel_in_connect): increase in_total_raw.
+	(tunnel_write_data): increase out_total_raw.
+	(tunnel_write): increase out_total_data.
+	(tunnel_read_request): increase in_total_raw.
+	(tunnel_read): increase in_total_data.
+	(tunnel_accept): increase in_total_raw and out_total_raw.
+	(tunnel_new_server, tunnel_new_client): reset counters.
+
+Sat Mar  6 10:57:54 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* configure.in: version 1.95.
+
+	* cvs tag release_1_94
+	
+	* NEWS: update for version 1.94.
+
+	* configure.in: version 1.94.
+	
+	* cvs tag release_1_93
+	
+	* NEWS: update for version 1.93.
+
+	* tunnel.c (tunnel_in_connect): check HTTP version and HTTP
+	status code.
+
+	* http.c (http_parse_response, read_until): new functions.
+
+	* tunnel.c (tunnel_in_connect): use http_parse_response().
+	
+	* configure.in: version 1.93.
+	
+	* cvs tag release_1_92
+	
+	* configure.in: version 1.92.
+	
+	* http.c, http.h (http_method, http_put, http_post, http_get):
+	Broke out HTTP-specific functions.
+
+	* tunnel.c: changed Tunnel to use Http_destination and modified
+	all affected code accordingly.
+
+	* cvs tag release_1_91
+	
+	* configure.in: version 1.91.
+
+	* NEWS: update news for 1.5, 1.90, and 1.91.
+	
+	* cvs tag release_1_90
+
+	* tunnel.c, htc.c, hts.c: clean up debugging messages.
+
+Thu Mar  4 06:44:27 1999  lars brinkhoff  <lars@nocrew.org>
+	
+	* common.h: #define LOG_ERROR LOG_ERR if necessary.  (tip
+	from Andrew Gray).
+
+Wed Mar  3 17:49:52 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* htc.c, hts.c (main): send a pad byte every now and
+ 	then to keep the connection alive.
+
+	* htc.c, hts.c (main): check for NULL before sending strings
+	to notice().
+
+	* common.c, common.h: made notice, debug, and verbose
+	into functions instead of macros (patch from Andrew
+	Gray).
+	
+	* tunnel.c: improved error logging.
+
+Tue Mar  2 17:48:23 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* tunnel.c (tunnel_maybe_pad): don't send padding if
+	only padding has been sent over the connection.
+	(tunnel_write_request): make a note if something other than
+	padding was sent over the connection.
+
+Sun Feb 28 00:34:13 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* tunnel.c (tunnel_write): use the protocol for server writes.
+	(tunnel_write_request): try to make server accept/disconnect
+	connections like the client does connect/disconnect.
+
+	* tunnel.c (tunnel_read_request): new function.
+	(tunnel_read): removed function.
+	(tunnel_server_read): renamed to tunnel_read.
+	(tunnel_read): call tunnel_read_request().
+
+	* configure.in: changed to version 1.90 in anticipation of the
+	big change to using the tunnel protocol on HTTP GET requests also.
+
+	* tunnel.c (tunnel_write_request): if writing to the connection
+	returns error EPIPE, the connection to the proxy has timed out,
+	and must be re-established.  I'm not drunk.
+
+Sat Feb 27 00:29:22 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* htc.c (sigpipe): new function.
+	(main): catch SIGPIPE.
+
+	* cvs tag release_1_5
+	
+	* configure.in: version 1.5.
+
+	* tunnel.c (tunnel_close): write padding before TUNNEL_CLOSE.
+
+Fri Feb 26 17:37:02 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* tunnel.c (tunnel_write_request): send a TUNNEL_DISCONNECT
+	just before disconnecting.
+	(tunnel_server_read): recognize TUNNEL_DISCONNECT as a command
+	to close the connection.
+	(tunnel_new_client): set tunnel->content_length to content_length
+	- 1 to allow for one extra TUNNEL_DISCONNECT at the end of the data.
+	(tunnel_out_connect): use tunnel->content_length + 1 to allow
+	for one extra TUNNEL_DISCONNECT at the end of the data.
+
+	* tunnel.c (tunnel_accept): Solaris expects a char * for argument
+ 	4 to setsockopt(), so casting to void * should not produce any
+ 	warnings anywhere.
+
+	* common.c, common.h (daemon): new function #ifndef HAVE_DAEMON.
+
+	* hts.c, htc.c: use daemon().
+
+	* configure.in: check for daemon().
+
+Thu Feb 25 20:43:49 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* hts.c (parse_arguments): added --logfile switch.
+
+	* htc.c (parse_arguments): added --logfile switch.
+
+	* common.h (log): new macro that calls syslog().
+
+	* tunnel.c (tunnel_accept): time out if out and in connections
+	doesn't occur within ACCEPT_TIMEOUT seconds of each other.
+
+Wed Feb 24 19:50:28 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* cvs tag release_1_4
+	
+	* configure.in: version 1.4
+
+	* tunnel.c (tunnel_close): use a timeout to avoild waiting forever
+	for trailing pad data after a TUNNEL_CLOSE.
+
+	* tunnel.c (tunnel_accept): Write a HTTP/1.1 header in response
+	to HTTP GET requests.
+	(tunnel_in_connect): Expect a header in a HTTP GET response.
+
+	* acinclude.m4 (HTTPTUNNEL_DEFINE_INADDR_NONE): spelling fix.
+
+	* htc.c, hts.c: hid the check for HAVE_GETOPT_H in common.h.
+
+Wed Feb 24 18:40:29 1999  Tomas Berndtsson  <tomas@nocrew.org>
+
+	* configure.in: added check for libnsl, which is needed on some
+	Solaris systems for networking functions.
+	
+	* htc.c, hts.c: use #ifdef HAVE_GETOPT_LONG and #ifdef
+	HAVE_GETOPT_H to exclude certain parts so that it will compile if
+	getopt_long is not presesnt on the system.
+
+	* configure.in: use HTTPTUNNEL_DEFINE_INADDR_NONE to check if
+	INADDR_NONE is defined.
+
+	* acconfig.h: added @BOTTOM@ statement to get autoheader to
+	include own defines into config.h.in.
+	
+	* acinclude.m4: define HTTPTUNNEL_DEFINE_INADDR_NONE, which checks
+	whether <netinet/in.h> defines INADDR_NONE. #define as 0xffffffff
+	otherwise. INADDR_NONE is not defined on Solaris.
+	
+Tue Feb 23 22:15:23 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* cvs tag release_1_3
+
+	* configure.in: version 1.3.
+
+	* common.h: #include <sys/socket.h> and <netinet/in.h> before
+	<arpa/inet.h>.  Hopefully, this will avoid compilation errors on
+	solaris 2.5.1.
+	
+	If getopt_long() isn't available, provide broken emulation through
+	getopt().
+
+Sun Feb 21 08:05:59 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* cvs tag release_1_2
+	
+	* configure.in: version 1.2.
+
+	* htc.c (parse_arguments): not specifying a proxy was incorrectly
+	reported as a usare error.  fixed.
+
+	* configure.in: use HTTPTUNNEL_TYPE_SOCKLEN_T to check for socklen_t.
+
+	* acinclude.m4: new file.  Define HTTPTUNNEL_TYPE_SOCKLEN_T,
+	which checks whether <sys/socket.h> declares socklen_t.  #define
+	as int otherwise.
+
+	* common.h (do_connect): cast second argument from sockaddr_in *
+	to sockaddr * to avoid warning.
+
+Sat Feb 20 09:23:11 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* cvs tag release_1_1
+	
+	* README: removed the note about the bug.
+
+	* tunnel.c (tunnel_server_read): fixed the annoying buffer bug.
+
+	* common.c (dump_buf): new function used to dump data read from
+	a device, socket, or tunnel.
+
+	* hts.c (main), htc.c (main), common.h: broke out common code
+	into handle_input().
+
+	* configure.in: version set to 1.1, but no release planned yet.
+
+	* HACKING: added a paragraph about the debugging code.
+	
+	* htc.c, hts.c: made --debug take optional argument instead
+	of previous repeating scheme.
+	
+	* rw.c: set debug = 0.  no debugging here.
+
+	* htc.c, hts.c, common.h: repeating --debug gives more verbose
+	debugging messages.
+	
+	* tt.c: set debug = 1 so that debugging is always on
+	        if --enable-debug is.
+
+	* tunnel.c: add debugging output.
+
+	* htc.c (usage): improved --help output.
+	(parse_arguments): allow default values for host port and proxy port.
+	(parse_arguments): add --debug switch.
+
+	* htc.c: add debugging output.
+	         don't fork if --debug.
+
+	* hts.c (usage): improved --help output.
+	(parse_arguments): allow a default setting for PORT.
+	(parse_arguments): complain if forwarding port isn't specified.
+	(parse_arguments): add --debug switch.
+
+	* hts.c: added debugging output.
+	         don't fork if --debug.
+
+	* configure.in: add --enable-debug switch.
+
+Fri Feb 19 00:09:00 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* cvs tag release_1_0
+
+	* htc.c (main): made it loop, waiting for new connections.
+	                added a close_tunnel().
+
+	* tunnel.c (tunnel_close): don't free tunnel object.
+	(tunnel_destroy): new function.
+	(tunnel_is_connected): new function.
+
+Thu Feb 18 07:28:18 1999  lars brinkhoff  <lars@nocrew.org>
+
+	* hts.c (main): loops waiting for new connections,
+	                daemon-like forking.
+
+	* configure.in: bumped version to 0.10.
+
+	* hts.c (usage): new function.
+	(parse_arguments): new function.
+	(main): call parse_arguments().
+	        if --forward-port was specified, connect a
+		socket, and use it for I/O.
+
+	* htc.c (parse_arguments): added new --forward-port option.
+	(main): if --forward-port was specified, listen for a connection
+	on a socket, and use it for I/O.
+
+	* common.c, common.h (server_socket): moved here from tunnel.h.
+
+	* common.c (set_address): new function.
+	(name_and_port): moved here from htc.c.
+
+	* common.h: moved contents of do.h here.
+
+	* do.h: deleted file.
+
+	* htc.c (wait_for_connection_on_port): new function.
+
+	* acconfig.h: New file defining PACKAGE and VERSION.

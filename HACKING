@@ -1,0 +1,96 @@
+	General idea.
+
+FIXME: client, server.  HTTP.
+
+All HTTP requests are made by the client, htc, and are served by the
+server, hts.  
+
+Data is sent to the server using HTTP PUT requests.  These have a
+Content-Length header line, which is obeyed strictly if the --strict
+option is used.  tunnel.c provides a nice interface to the
+complexities of HTTP requests. See tunnel.h for information about the
+programming interface.
+
+In the other direction, data is transferred using  HTTP GET requests.
+
+
+	Proxy buffering.
+
+Some proxies buffer data in HTTP PUT or POST requests.  FIXME: explain
+why this is a problem and how it is solved.
+
+
+	Debugging.
+
+To enable debugging code, use --enable-debug with 'configure'.  This
+will make htc and hts recognize a --debug switch.
+	--debug 0 - no messages whatsoever
+	--debug 1 - log_notice () - important events
+	--debug 2 - log_error () - unexpected errors
+	--debug 3 - log_debug () - sparse debugging
+	--debug 4 - log_verbose () - debugging in innner loops
+	--debug 5 - log_annoying () - system calls and more
+
+Without --enable-debug, log_notice() and log_error() will log using
+syslog() with level LOG_NOTICE and LOG_ERROR, respectively.
+log_debug(), log_verbose(), and log_annoying() will be disabled.
+
+
+	Some notes about the protocol.
+
+The data sent in HTTP requests is in itself formatted according to a
+simple protocol.  This is needed becase some HTTP proxy servers buffer
+data before sending it to its final destination.
+
+There are seven different requests in this protocol, and there are
+two types of requests.  Requests with the 0x40 bit set consists of
+just one byte, with no additional data.  Requests with the 0x40 bit
+clear have a two-byte length field and a variable length data field.
+
+  TUNNEL_OPEN
+  01 xx xx yy...
+	xx xx = length of auth data
+	yy... = auth data
+
+	OPEN is the initial request.  For now, auth data is unused,
+	but should be used for authentication.
+
+  TUNNEL_DATA
+  02 xx xx yy...
+	xx xx = lenth of data
+	yy... = data
+
+	DATA is the one and only way to send data.
+
+  TUNNEL_PADDING
+  03 xx xx yy...
+	xx xx = lenth of padding
+	yy... = padding (will be discarded)
+
+	PADDING exists only to allow padding the HTTP data.  This is
+	needed for HTTP proxies that buffer data.
+
+  TUNNEL_ERROR
+  04 xx xx yy...
+	xx xx = length of error message
+	yy... = error message
+
+	Report an error to the peer.
+
+  TUNNEL_PAD1
+  45
+	PAD1 can be used for padding when a PADDING request would be
+	too long with regard to Content-Length.  PADDING should always
+	be preferred, though, because it's easier for the recipent to
+	parse one large request than many small.
+
+  TUNNEL_CLOSE
+  46
+	CLOSE is used to close the tunnel.  No more data can be sent
+	after this request is issued, except for a TUNNEL_DISCONNECT.
+
+  TUNNEL_DISCONNECT
+  47
+	DISCONNECT is used to close the connection temporarily,
+	probably because Content-Length - 1 number of bytes of data
+	has been sent in the HTTP request.

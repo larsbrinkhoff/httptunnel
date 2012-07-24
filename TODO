@@ -1,0 +1,154 @@
+Things to do, in a slightly random order:
+
+* Error detection.
+
+  Maybe HTTP over TCP isn't all that reliable?  Especially
+  considering that there's a proxy in the middle.
+
+  Detect lost connections and reconnect.  Checksum data.  Retransmit
+  lost data.  Etc etc.
+
+  This is a big project, but it would be nice to have a reliable
+  transport layer (I THINK it's called "transport layer").
+
+  >> Actually, it seems reliable enough.
+
+* Actually use the #defines in config.h
+
+  What good is autoconf if you don't use what it generates for you?
+
+  >> Getting better.
+
+* Handling of TUNNEL_OPEN in the server.
+
+  Come up with something useful to put in the auth_data section
+  of a TUNNEL_OPEN request.
+
+* Adhere to Content-Length, even when doing a tunnel_close().
+
+  For now, Content-Length is adhered to strictly everywhere except
+  in tunnel_close().  tunnel_close() could, optionally, send
+  padding after the close request.
+
+  >> Done, but it's not optional.  Yet.  Should it be?
+
+* Auto-detect proxy PUT/POST buffering.
+
+  Idea: make a second HTTP GET request that will be used to send
+  ACKs to the client when HTTP PUT/POST data arrives.  If data is
+  sent in a PUT/POST reqest and the ACK channel is silent, pad the
+  PUT/POST data until ACK arrives.
+
+* Remove busy poll loops.
+
+  I wrote then that way only because I wanted fast results.
+  I didn't intend them to be that way forever.  I promise!
+
+  Instead, use select() or poll() with nice timeouts.
+
+  >> Done for the server.  Remaining: don't use blocking
+     read()s, buffer data until a complete request is received.
+
+  >> Done for the client.
+
+* Make client and server not fork?
+
+  >> Done for the server.
+
+  >> Done for the client.
+
+* Multiplex data channels in the tunnel.
+
+  >> Perhaps in external programs.
+     >> See Port forwarding.
+
+* Socket-to-device and device-to-socket gateways.
+
+  >> External programs.
+     >> See Port forwarding.
+
+* CGI-to-hts gateway.
+
+  If the HTTP tunnel is to connect to an already existing HTTP
+  server, there could be a CGI program relaying tunnel traffic
+  to hts.
+
+* tunnel_write () always tries to write all the data, regardless of
+  wheter O_NONLBOCK is set or not.
+
+  Is this a problem?
+
+* Use zlib for compression.
+
+  Note that padding can't be compressed.
+
+* Port forwarding.
+
+  'htf --port 23 --destination my.site.org:23' waits for a connection
+  on local port 23, and talks to htfmux using a small protocol.
+
+  htfmux waits for connections and talks to htc trough a pseudo-tty.
+
+  htfmux reads data from all its connections and multiplexes it over
+  the tunnel.  Yet another protocol for this.
+
+  In the other end, hts talks to htdemux, which handles the other half
+  of port forwarding.
+
+  Why separate htf and hftmux?  Because there is only one instance
+  of hftmux running.  To add or remove a new port forwarding, just
+  run a new htf or kill an already running one.  This could also
+  be accomplished with hftmux re-reading a configuration file
+  every time it gets a SIGHUP.
+
+  Either way is possible.  Implement one and see if someone hacks
+  up something better.
+
+* Use 'Connection: keep-alive'.
+
+  Keep the connection alive instead of closing it down efter every
+  HTTP request.
+
+* Threading.
+
+  Separate thread for device/port input and tunnel input.
+
+* --paranoid switch.
+
+  Make the data look like HTML code!
+
+* protocol abstraction
+
+From: Raphael Manfredi <Raphael.Manfredi@st.com>
+Date: Tue, 17 Aug 1999 16:36:43 +0200
+
+Rename httptunnel as "xtptunnel" :-)
+
+Why limit yourself to http? Why not also allow ftptunnel?
+
+    xts -t ftp ....      <=>   xtc -t ftp ....
+    xtc -t http ...      <=>   xtc -t http ....
+
+If the "tunnel_*" routines are made "generic" in their signature, one could
+imagine to put them all in a stucture:
+
+	struct xtp {
+		/* open routine pointer */
+		/* read routine pointer */
+		/* write routine pointer */
+		/* close routine pointer */
+	} xtp;
+
+Then one would get one xtp "driving" structure per protocol type. The
+code would get much more modular, and extensible, and common code could
+get factored out, leaving only protocol-specific idiosyncracies in the
+driving routines.
+
+This kind of design looks like a filesystem stack: on top of it, VFS, a
+virtual file system, and underneath, specific "drivers" for low-level
+routines for UFS, NFS, CDFS, etc...
+
+The FTP proxy must allow PUT requests to go through for this to work on
+top of FTP, but it might be useful when an HTTP proxy filters http URLs
+(making it impossible to connect to the remote server at some *.dhis.org site,
+e.g.), and don't filter FTP ones.

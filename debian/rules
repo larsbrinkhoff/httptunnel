@@ -1,0 +1,87 @@
+#!/usr/bin/make -f
+#-*- makefile -*-
+
+install		= install -o root -g root
+install_exec	= $(install) -m 755 -s
+install_dir	= $(install) -m 755 -d
+install_nonex	= $(install) -m 644
+install_script	= $(install) -m 755
+install_zipped	= gzip -9vc
+install_symlink	= ln -s
+
+package		= httptunnel
+rootdir		= `pwd`/debian/tmp
+docdir		= $(rootdir)/usr/share/doc/$(package)
+bindir		= $(rootdir)/usr/bin
+mandir		= $(rootdir)/usr/share/man
+man1dir		= $(mandir)/man1
+
+build: debian/build.stamp
+debian/build.stamp:
+	$(checkdir)
+	CFLAGS="-O2 -g -Wall" CC=gcc ./configure --prefix=/usr \
+		--mandir=/usr/share/man
+	$(MAKE)
+	touch $@
+
+clean-build:
+	$(RM) debian/build*.stamp
+	-$(MAKE) distclean
+
+binary: binary-arch binary-indep
+
+binary-indep: debian/binary-indep.stamp
+debian/binary-indep.stamp:
+	touch $@
+
+binary-arch: debian/binary-arch.stamp
+debian/binary-arch.stamp: build
+	$(checkdir)
+	$(RM) -r $(rootdir)
+	$(install_dir) $(rootdir)
+	$(install_dir) $(rootdir)/DEBIAN
+	$(install_dir) $(docdir)
+	$(install_dir) $(bindir)
+	$(install_dir) $(man1dir)
+	$(MAKE) install-strip prefix=`pwd`/debian/tmp/usr mandir=`pwd`/debian/tmp/usr/share/man
+#	changelogs
+	$(install_nonex) debian/changelog $(docdir)/changelog.Debian
+	$(install_nonex) ChangeLog $(docdir)/changelog
+#	docs
+	$(install_nonex) FAQ $(docdir)
+	$(install_nonex) INSTALL $(docdir)
+	$(install_nonex) NEWS $(docdir)
+	$(install_nonex) README $(docdir)
+	$(install_nonex) TODO $(docdir)
+	$(install_nonex) DISCLAIMER $(docdir)
+	$(install_nonex) AUTHORS $(docdir)
+	$(install_nonex) HACKING $(docdir)
+	gzip -9vfr $(docdir)/
+
+	gzip -9vfr $(man1dir)/
+
+#	copyright
+	$(install_nonex) debian/copyright $(docdir)
+#	control
+	$(install_script) debian/prerm $(rootdir)/DEBIAN
+	$(install_script) debian/postinst $(rootdir)/DEBIAN
+
+	dpkg-shlibdeps $(bindir)/hts $(bindir)/htc
+	dpkg-gencontrol -isp
+
+	chown -R root.root $(rootdir)
+	chmod -R g-ws $(rootdir)
+
+	dpkg --build $(rootdir) ..
+	touch $@
+
+define checkdir
+	test -f htc.c -a -f hts.c -a -f debian/rules
+endef
+
+clean-binary:
+	$(RM) debian/binary*.stamp
+	$(RM) *~
+	$(RM) -r debian/tmp debian/*~ debian/files debian/substvars
+
+clean: clean-build clean-binary

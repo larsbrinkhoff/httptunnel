@@ -1,0 +1,58 @@
+dnl Copyright (C) Lars Brinkhoff.
+
+dnl Process this file with autoconf to produce a configure script.
+AC_INIT(tunnel.c)
+AM_INIT_AUTOMAKE(httptunnel, 3.3.cvs)
+AM_CONFIG_HEADER(config.h)
+
+AM_CONDITIONAL(SRCDIR, test "x$srcdir" != x.)
+
+AC_ARG_ENABLE(debug,
+              [  --enable-debug            enable debugging],
+              AC_DEFINE(DEBUG_MODE, 1))
+
+if test "x$CFLAGS" = x; then
+	if test "x$enable_debug" != x; then
+		CFLAGS="-g -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith"
+	else
+		CFLAGS="-O2 -Wall -fomit-frame-pointer"
+	fi
+fi
+
+dnl Checks for programs.
+AC_PROG_AWK
+AC_PROG_CC
+AC_ARG_PROGRAM
+AC_PROG_INSTALL
+AC_PROG_LN_S
+AC_PROG_RANLIB
+
+dnl Checks for libraries.
+AC_CHECK_FUNC(gethostent, , AC_CHECK_LIB(nsl, gethostent))
+AC_CHECK_FUNC(setsockopt, , AC_CHECK_LIB(socket, setsockopt))
+
+dnl Checks for header files.
+AC_HEADER_STDC
+AC_CHECK_HEADERS(fcntl.h syslog.h unistd.h sys/poll.h)
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_C_CONST
+AC_C_INLINE
+AC_TYPE_SIZE_T
+##AC_CHECK_TYPE(socklen_t, unsigned) # doesn't search <sys/socket.h>
+HTTPTUNNEL_TYPE_SOCKLEN_T
+HTTPTUNNEL_DEFINE_INADDR_NONE
+AC_CHECK_SIZEOF(char, 1)
+AC_CHECK_SIZEOF(short, 2)
+AC_CHECK_SIZEOF(int, 4)
+AC_CHECK_SIZEOF(long, 4)
+AC_CHECK_SIZEOF(long long, 8)
+
+dnl Checks for library functions.
+AC_FUNC_MEMCMP
+AC_TYPE_SIGNAL
+AC_FUNC_VPRINTF
+AC_CHECK_FUNCS(socket strdup strerror daemon vsyslog)
+AC_CHECK_FUNCS(poll select endprotoent vsnprintf syslog)
+
+AC_OUTPUT(Makefile port/Makefile port/sys/Makefile)
