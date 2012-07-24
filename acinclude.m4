@@ -1,7 +1,7 @@
 dnl HTTPTUNNEL_TYPE_SOCKLEN_T
 dnl Check for the existance of type socklen_t.
 
-AC_DEFUN(HTTPTUNNEL_TYPE_SOCKLEN_T,
+AC_DEFUN([HTTPTUNNEL_TYPE_SOCKLEN_T],
 [AC_CACHE_CHECK([for socklen_t], ac_cv_httptunnel_type_socklen_t,
 [
   AC_TRY_COMPILE(
@@ -12,7 +12,8 @@ AC_DEFUN(HTTPTUNNEL_TYPE_SOCKLEN_T,
   ac_cv_httptunnel_type_socklen_t=no)
 ])
   if test $ac_cv_httptunnel_type_socklen_t != yes; then
-    AC_DEFINE(socklen_t, int)
+    AC_DEFINE(socklen_t, int,
+	[Define to 'int' if <sys/socket.h> doesn't define.])
   fi
 ])
 
@@ -20,7 +21,7 @@ AC_DEFUN(HTTPTUNNEL_TYPE_SOCKLEN_T,
 dnl HTTPTUNNEL_DEFINE_INADDR_NONE
 dnl Check for the existance of define INADDR_NONE
 
-AC_DEFUN(HTTPTUNNEL_DEFINE_INADDR_NONE,
+AC_DEFUN([HTTPTUNNEL_DEFINE_INADDR_NONE],
 [AC_CACHE_CHECK([whether INADDR_NONE is defined], ac_cv_httptunnel_define_inaddr_none,
 [
   AC_TRY_COMPILE(
@@ -34,3 +35,7 @@ AC_DEFUN(HTTPTUNNEL_DEFINE_INADDR_NONE,
     AC_DEFINE(INADDR_NONE, 0xffffffff)
   fi
 ])
+
+AH_BOTTOM([/* Define to 0xffffffff if <netinet/in.h> doesn't define. */
+#undef INADDR_NONE])
+
