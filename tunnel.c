@@ -140,25 +140,25 @@ static int
 tunnel_in_setsockopts (int fd)
 {
 #ifdef SO_RCVLOWAT
-      int i, n;
+  int i, n;
 
-      i = 1;
-      if (setsockopt (fd,
-		      SOL_SOCKET,
-		      SO_RCVLOWAT,
-		      (void *)&i,
-		      sizeof i) == -1)
-	{
-	  log_debug ("tunnel_in_setsockopts: non-fatal SO_RCVLOWAT error: %s",
-		     strerror (errno));
-	}
-      n = sizeof i;
-      getsockopt (fd,
+  i = 1;
+  if (setsockopt (fd,
 		  SOL_SOCKET,
 		  SO_RCVLOWAT,
 		  (void *)&i,
-		  &n);
-      log_debug ("tunnel_out_setsockopts: SO_RCVLOWAT: %d", i);
+		  sizeof i) == -1)
+    {
+      log_debug ("tunnel_in_setsockopts: non-fatal SO_RCVLOWAT error: %s",
+		  strerror (errno));
+    }
+  n = sizeof i;
+  getsockopt (fd,
+	      SOL_SOCKET,
+	      SO_RCVLOWAT,
+	      (void *)&i,
+	      &n);
+  log_debug ("tunnel_out_setsockopts: SO_RCVLOWAT: %d", i);
 #endif /* SO_RCVLOWAT */
 
   return 0;
@@ -171,24 +171,24 @@ tunnel_out_setsockopts (int fd)
   {
     int i, n;
  
-	i = 1;
-	if (setsockopt (fd,
-			SOL_SOCKET,
-			SO_SNDLOWAT,
-			(void *)&i,
-			sizeof i) == -1)
-	  {
-	    log_debug ("tunnel_out_setsockopts: "
-		       "non-fatal SO_SNDLOWAT error: %s",
-		       strerror (errno));
-	  }
-	n = sizeof i;
-	getsockopt (fd,
+    i = 1;
+    if (setsockopt (fd,
 		    SOL_SOCKET,
 		    SO_SNDLOWAT,
 		    (void *)&i,
-		    &n);
-	log_debug ("tunnel_out_setsockopts: non-fatal SO_SNDLOWAT: %d", i);
+		    sizeof i) == -1)
+      {
+	log_debug ("tunnel_out_setsockopts: "
+		    "non-fatal SO_SNDLOWAT error: %s",
+		    strerror (errno));
+      }
+    n = sizeof i;
+    getsockopt (fd,
+		SOL_SOCKET,
+		SO_SNDLOWAT,
+		(void *)&i,
+		&n);
+    log_debug ("tunnel_out_setsockopts: non-fatal SO_SNDLOWAT: %d", i);
   }
 #endif /* SO_SNDLOWAT */
 
