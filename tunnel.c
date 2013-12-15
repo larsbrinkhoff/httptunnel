@@ -140,15 +140,11 @@ static int
 tunnel_in_setsockopts (int fd)
 {
 #ifdef SO_RCVLOWAT
-  int tcp = get_proto_number ("tcp");
-
-  if (tcp != -1)
-    {
       int i, n;
 
       i = 1;
       if (setsockopt (fd,
-		      tcp,
+		      SOL_SOCKET,
 		      SO_RCVLOWAT,
 		      (void *)&i,
 		      sizeof i) == -1)
@@ -158,12 +154,11 @@ tunnel_in_setsockopts (int fd)
 	}
       n = sizeof i;
       getsockopt (fd,
-		  tcp,
+		  SOL_SOCKET,
 		  SO_RCVLOWAT,
 		  (void *)&i,
 		  &n);
       log_debug ("tunnel_out_setsockopts: SO_RCVLOWAT: %d", i);
-    }
 #endif /* SO_RCVLOWAT */
 
   return 0;
@@ -174,14 +169,11 @@ tunnel_out_setsockopts (int fd)
 {
 #ifdef SO_SNDLOWAT
   {
-    int tcp = get_proto_number ("tcp");
     int i, n;
  
-    if (tcp != -1)
-      {
 	i = 1;
 	if (setsockopt (fd,
-			tcp,
+			SOL_SOCKET,
 			SO_SNDLOWAT,
 			(void *)&i,
 			sizeof i) == -1)
@@ -192,12 +184,11 @@ tunnel_out_setsockopts (int fd)
 	  }
 	n = sizeof i;
 	getsockopt (fd,
-		    tcp,
+		    SOL_SOCKET,
 		    SO_SNDLOWAT,
 		    (void *)&i,
 		    &n);
 	log_debug ("tunnel_out_setsockopts: non-fatal SO_SNDLOWAT: %d", i);
-      }
   }
 #endif /* SO_SNDLOWAT */
 
