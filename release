@@ -1,8 +1,0 @@
-i=`echo httptunnel-*.tar.gz`
-echo release $i
-cp $i ~ftp/pub/nocrew/unix
-ln -s ~ftp/pub/nocrew/unix/$i /home/www/www.nocrew.org/software/httptunnel
-rm -i $i
-echo
-echo "DON'T FORGET 'cvs tag'!"
-echo
