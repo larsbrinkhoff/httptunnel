@@ -1,0 +1,16 @@
+*~
+*.o
+*.a
+.deps
+htc
+hts
+Makefile
+Makefile.in
+aclocal.m4
+autom4te.cache
+stamp-h1
+config.h
+config.h.in
+config.log
+config.status
+configure
