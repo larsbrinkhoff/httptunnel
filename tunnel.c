@@ -158,7 +158,7 @@ tunnel_in_setsockopts (int fd)
 	      SO_RCVLOWAT,
 	      (void *)&i,
 	      &n);
-  log_debug ("tunnel_out_setsockopts: SO_RCVLOWAT: %d", i);
+  log_debug ("tunnel_in_setsockopts: SO_RCVLOWAT: %d", i);
 #endif /* SO_RCVLOWAT */
 
   return 0;
@@ -170,7 +170,7 @@ tunnel_out_setsockopts (int fd)
 #ifdef SO_SNDLOWAT
   {
     int i, n;
- 
+
     i = 1;
     if (setsockopt (fd,
 		    SOL_SOCKET,
@@ -223,7 +223,7 @@ tunnel_out_setsockopts (int fd)
   {
     int tcp = get_proto_number ("tcp");
     int i, n;
- 
+
     if (tcp != -1)
       {
 	i = 1;
@@ -529,7 +529,7 @@ tunnel_write_request (Tunnel *tunnel, Request request,
 	    {
 		char c = TUNNEL_PAD1;
 		int i;
-		
+
 	    	for (i=0; i<l; i++)
   			tunnel_write_data (tunnel, &c, sizeof c);
 	    }
@@ -630,7 +630,7 @@ tunnel_write_request (Tunnel *tunnel, Request request,
   if (tunnel->bytes > tunnel->content_length)
     log_debug ("tunnel_write_request: tunnel->bytes > tunnel->content_length");
 #endif
-		    
+
   if (tunnel->bytes >= tunnel->content_length)
     {
       char c = TUNNEL_DISCONNECT;
@@ -1079,7 +1079,7 @@ tunnel_accept (Tunnel *tunnel)
 
   while (tunnel->in_fd == -1 || tunnel->out_fd == -1)
     {
-      struct sockaddr_in addr; 
+      struct sockaddr_in addr;
       Http_request *request;
       struct pollfd p;
       ssize_t m;
@@ -1299,7 +1299,7 @@ tunnel_new_client (const char *host, int host_port,
   Tunnel *tunnel;
 
   log_verbose ("tunnel_new_client (\"%s\", %d, \"%s\", %d, %d)",
-	       host, host_port, proxy ? proxy : "(null)", proxy_port, 
+	       host, host_port, proxy ? proxy : "(null)", proxy_port,
 	       content_length);
 
   tunnel = malloc (sizeof (Tunnel));
