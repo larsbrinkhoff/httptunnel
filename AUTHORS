@@ -2,7 +2,7 @@ Programming:		Lars Brinkhoff <lars@nocrew.org>
 Research:		Stefan Berndtsson <stefan@nocrew.org>
 			Magnus Lundström <logic@nocrew.org>
 Disclaimer:		Barak Pearlmutter <bap@cs.unm.edu>
-Documentation:		Teemu Hukkanen <tjhukkan@fishpool.fi>
+Documentation:		Teemu Hukkanen <tjhukkan@iki.fi>
 getopt_long usage:	Taken from the manual page.
 getopt_long code:	Taken from GNU fileutils-4.0.
 Patches:		Tomas Berndtsson <tomas@nocrew.org> (Solaris)
