@@ -41,7 +41,7 @@ encode_base64 (const void *data, size_t length, char **code)
   if (length == 0)
     return 0;
 
-  end = (char *)data + length - 3;
+  end = (unsigned char *)data + length - 3;
 
   buf = malloc (4 * ((length + 2) / 3) + 1);
   if (buf == NULL)
@@ -88,6 +88,6 @@ encode_base64 (const void *data, size_t length, char **code)
 
   *buf = 0;
 
-  *code = buf - n;
+  *code = (char *)buf - n;
   return n;
 }

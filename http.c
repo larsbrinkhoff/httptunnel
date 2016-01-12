@@ -42,7 +42,7 @@ http_method (int fd, Http_destination *dest,
 
   if (length >= 0)
     {
-      sprintf (str, "%d", length);
+      sprintf (str, "%ld", length);
       http_add_header (&request->header, "Content-Length", str);
     }
 
@@ -183,9 +183,9 @@ http_method_to_string (Http_method method)
 }
 
 static ssize_t
-read_until (int fd, int ch, unsigned char **data)
+read_until (int fd, int ch, char **data)
 {
-  unsigned char *buf, *buf2;
+  char *buf, *buf2;
   ssize_t n, len, buf_size;
 
   *data = NULL;
@@ -283,7 +283,7 @@ static ssize_t
 parse_header (int fd, Http_header **header)
 {
   unsigned char buf[2];
-  unsigned char *data;
+  char *data;
   Http_header *h;
   size_t len;
   ssize_t n;
@@ -454,7 +454,7 @@ ssize_t
 http_parse_response (int fd, Http_response **response_)
 {
   Http_response *response;
-  unsigned char *data;
+  char *data;
   size_t len;
   ssize_t n;
 
@@ -619,7 +619,7 @@ ssize_t
 http_parse_request (int fd, Http_request **request_)
 {
   Http_request *request;
-  unsigned char *data;
+  char *data;
   size_t len;
   ssize_t n;
 

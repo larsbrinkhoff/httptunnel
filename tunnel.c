@@ -140,7 +140,8 @@ static int
 tunnel_in_setsockopts (int fd)
 {
 #ifdef SO_RCVLOWAT
-  int i, n;
+  socklen_t n;
+  int i;
 
   i = 1;
   if (setsockopt (fd,
@@ -150,7 +151,7 @@ tunnel_in_setsockopts (int fd)
 		  sizeof i) == -1)
     {
       log_debug ("tunnel_in_setsockopts: non-fatal SO_RCVLOWAT error: %s",
-		  strerror (errno));
+		 strerror (errno));
     }
   n = sizeof i;
   getsockopt (fd,
@@ -169,7 +170,8 @@ tunnel_out_setsockopts (int fd)
 {
 #ifdef SO_SNDLOWAT
   {
-    int i, n;
+    socklen_t n;
+    int i;
 
     i = 1;
     if (setsockopt (fd,
@@ -179,8 +181,8 @@ tunnel_out_setsockopts (int fd)
 		    sizeof i) == -1)
       {
 	log_debug ("tunnel_out_setsockopts: "
-		    "non-fatal SO_SNDLOWAT error: %s",
-		    strerror (errno));
+		   "non-fatal SO_SNDLOWAT error: %s",
+		   strerror (errno));
       }
     n = sizeof i;
     getsockopt (fd,
@@ -195,7 +197,7 @@ tunnel_out_setsockopts (int fd)
 #ifdef SO_LINGER
   {
     struct linger l;
-    int n;
+    socklen_t n;
 
     l.l_onoff = 1;
     l.l_linger = 20 * 100; /* linger for 20 seconds */
@@ -222,7 +224,8 @@ tunnel_out_setsockopts (int fd)
 #ifdef TCP_NODELAY
   {
     int tcp = get_proto_number ("tcp");
-    int i, n;
+    socklen_t n;
+    int i;
 
     if (tcp != -1)
       {
@@ -274,7 +277,8 @@ tunnel_out_setsockopts (int fd)
 
 #ifdef SO_KEEPALIVE
   {
-    int i, n;
+    socklen_t n;
+    int i;
 
     i = 1;
     if (setsockopt (fd,
@@ -796,7 +800,7 @@ tunnel_close (Tunnel *tunnel)
 
 static int
 tunnel_read_request (Tunnel *tunnel, enum tunnel_request *request,
-		     unsigned char *buf, size_t *length)
+		     char *buf, size_t *length)
 {
   Request req;
   Length len;
@@ -1083,7 +1087,7 @@ tunnel_accept (Tunnel *tunnel)
       Http_request *request;
       struct pollfd p;
       ssize_t m;
-      int len;
+      socklen_t len;
       int n;
       int s;
 
@@ -1171,7 +1175,7 @@ tunnel_accept (Tunnel *tunnel)
 /* "Last-Modified: %s\r\n" */
 /* "ETag: %s\r\n" */
 /* "Accept-Ranges: %s\r\n" */
-"Content-Length: %d\r\n"
+"Content-Length: %lu\r\n"
 "Connection: close\r\n"
 "Pragma: no-cache\r\n"
 "Cache-Control: no-cache, no-store, must-revalidate\r\n"
