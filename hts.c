@@ -46,7 +46,7 @@ static void
 usage (FILE *f, const char *me)
 {
   fprintf (f,
-"Usage: %s [OPTION]... [PORT]\n"
+"Usage: %s [OPTION]... [HOST:][PORT]\n"
 "Listen for incoming httptunnel connections at PORT (default port is %d).\n"
 "When a connection is made, I/O is redirected to the destination specified\n"
 "by the --device, --forward-port or --stdin-stdout switch.\n"

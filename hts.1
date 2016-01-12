@@ -3,14 +3,15 @@
 hts \- httptunnel server
 .SH SYNOPSIS
 .B hts
-.I "[options] [port]"
+.I "[options] [host:][port]"
 .SH "DESCRIPTION"
 This manual page briefly documents the
 .BR hts
 command.
 .PP
 .B hts
-listens for incoming httptunnel connections at PORT (default port is 8888).
+listens for incoming httptunnel connections at PORT (default port is
+8888), and optionally binds to ip address HOST.
 When a connection is made, I/O is redirected to the destination specified
 by the --device or --forward-port switch.
 .SH OPTIONS
