@@ -1,0 +1,9 @@
+os:
+  - linux
+language: c
+script:
+  - ./autogen.sh
+  - ./configure
+  - make
+notifications:
+  email: lars@nocrew.org
