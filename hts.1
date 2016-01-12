@@ -37,11 +37,17 @@ send keepalive bytes every SECONDS seconds (default is 5)
 .B \-M, \-\-max\-connection\-age SEC
 maximum time a connection will stay open is SEC seconds (default is 300)
 .TP
+.B \-s, \-\-stdin\-stdout
+use stdin/stdout for communication (implies \-\-no\-daemon)
+.TP
 .B \-S, \-\-strict\-content\-length
 always write Content-Length bytes in requests
 .TP
 .B \-V, \-\-version
 output version information and exit
+.TP
+.B \-w, \-\-no-daemon
+don't fork into the background
 .TP
 .B \-p, \-\-pid\-file LOCATION
 write a PID file to LOCATION

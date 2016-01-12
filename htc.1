@@ -42,7 +42,7 @@ always write Content-Length bytes in requests
 .B \-A, \-\-proxy\-authorization USER:PASSWORD
 proxy authorization
 .TP
-.B \-\-proxy\-authorization\-file FILE
+.B \-z, \-\-proxy\-authorization\-file FILE
 proxy authorization file
 .TP
 .B \-B, \-\-proxy\-buffer\-size BYTES
@@ -60,6 +60,9 @@ specify User-Agent value in HTTP requests
 .TP
 .B \-V, \-\-version
 output version information and exit
+.TP
+.B \-w, \-\-no-daemon
+don't fork into the background
 
 .SH AUTHOR
 This manual page was contributed by Teemu Hukkanen <tjhukkan@iki.fi>,
