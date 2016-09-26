@@ -9,11 +9,11 @@ the firewall.
 If you still don't understand what this is all about, maybe you  
 can find some useful information in the FAQ file.  
 
-This program is mostly intended for technically oriented users.  
+This program is mostly intended for technically-oriented users.  
 They should know what to do.  
 
 Read INSTALL for instructions on how to build a released version.  
-If you build the development repository, run ./autogen.sh first.  
+If you build the development repository, run `./autogen.sh` first.  
 
 httptunnel is free software.  See COPYING for terms and conditions.  
 If you like it, I would appreciate if you sent a post card to:  
@@ -32,9 +32,9 @@ the potential to do dangerous things, like disabling the protection
 you system administrator has set up for the local network.  Read the  
 DISCLAIMER file.  
 
-There are two programs: hts and htc.  hts is the httptunnel server  
-and htc is the client.  hts should be installed on a computer outside  
-the HTTP proxy, and htc should be installed on your local computer.  
+There are two programs: `hts` and `htc`.  `hts` is the *httptunnel server*  
+and `htc` is the *client*.  `hts` should be installed on a computer outside  
+the HTTP proxy, and `htc` should be installed on your local computer.  
 
 Documentation about how to use the programs should be searched in this  
 order:  
@@ -59,5 +59,5 @@ See also:
  * https://sergvergara.files.wordpress.com/2011/04/http_tunnel.pdf - excellent httptunnel tutorial, examples, & info
  * http://sebsauvage.net/punching/ - another excellent example
  * https://daniel.haxx.se/docs/sshproxy.html - more useful info
- * http://neophob.com/2006/10/gnu-httptunnel-v33-windows-binaries/ - httptunnel Win32 binaries
+ * http://neophob.com/2006/10/gnu-httptunnel-v33-windows-binaries/ - httptunnel Win32 binaries (download here)
  * [broken link] ~~http://metalab.unc.edu/LDP/HOWTO/mini/Firewall-Piercing.html which is a good introduction to firewall piercing.  It also has describes one way to use httptunnel.~~
