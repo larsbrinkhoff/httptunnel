@@ -66,4 +66,5 @@ Having said that, here's a (possibly outdated) example:
  * http://sebsauvage.net/punching/ - another excellent example
  * https://daniel.haxx.se/docs/sshproxy.html - more useful info
  * http://neophob.com/2006/10/gnu-httptunnel-v33-windows-binaries/ - httptunnel Win32 binaries (download here)
+ * [Google search for "http tunnel v3.3"](https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=http%20tunnel%20v3.3) - brings up lots of good links to httptunnel (this search seems to work better than searching for "httptunnel" alone since the latter brings up many generic search results or results pertaining to other tools)
  * [broken link] ~~http://metalab.unc.edu/LDP/HOWTO/mini/Firewall-Piercing.html which is a good introduction to firewall piercing.  It also has describes one way to use httptunnel.~~
