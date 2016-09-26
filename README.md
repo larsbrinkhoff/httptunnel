@@ -1,3 +1,4 @@
+#Background:  
 httptunnel creates a bidirectional virtual data path tunnelled in HTTP  
 requests.  The requests can be sent via an HTTP proxy if so desired.  
 
@@ -12,9 +13,11 @@ can find some useful information in the FAQ file.
 This program is mostly intended for technically-oriented users.  
 They should know what to do.  
 
+#Install:  
 Read INSTALL for instructions on how to build a released version.  
 If you build the development repository, run `./autogen.sh` first.  
 
+#License:  
 httptunnel is free software.  See COPYING for terms and conditions.  
 If you like it, I would appreciate if you sent a post card to:  
 > Lars Brinkhoff  
@@ -32,6 +35,7 @@ the potential to do dangerous things, like disabling the protection
 you system administrator has set up for the local network.  Read the  
 DISCLAIMER file.  
 
+#Usage & Documentation: 
 There are two programs: `hts` and `htc`.  `hts` is the *httptunnel server*  
 and `htc` is the *client*.  `hts` should be installed on a computer outside  
 the HTTP proxy, and `htc` should be installed on your local computer.  
@@ -54,7 +58,7 @@ Having said that, here's a (probably outdated) example:
     `telnet localhost 2323`  
     and you will hopefully get a login prompt from host REMOTE.  
 
-See also:  
+#See also:  
 
  * https://sergvergara.files.wordpress.com/2011/04/http_tunnel.pdf - excellent httptunnel tutorial, examples, & info
  * http://sebsauvage.net/punching/ - another excellent example
