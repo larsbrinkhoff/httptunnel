@@ -57,7 +57,7 @@ Having said that, here's a (possibly outdated) example:
   * or, if using a buffering HTTP proxy:  
     `htc -F 2323 -P PROXY_ADDRESS:8000 -B 48K REMOTE_IP:8888`  
   * Now you can do this at host LOCAL:  
-    `telnet localhost 2323` (telnet in to REMOTE_IP:8888 via your httptunnel you just configured above on port localhost:2323)
+    `telnet localhost 2323` (telnet in to REMOTE_IP:8888 via your httptunnel you just configured above on port localhost:2323)  
     ...and you will hopefully get a login prompt from host REMOTE_IP.  
 
 #External help, examples, & links:  
