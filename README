@@ -55,7 +55,9 @@ Having said that, here's a (probably outdated) example:
 		telnet localhost 2323
 	and you will hopefully get a login prompt from host REMOTE.
 
-See also
-	~~http://metalab.unc.edu/LDP/HOWTO/mini/Firewall-Piercing.html~~
-which is a good introduction to firewall piercing.  It also has
-describes one way to use ~~httptunnel.~~
+See also:  
+
+* https://sergvergara.files.wordpress.com/2011/04/http_tunnel.pdf - excellent httptunnel tutorial, examples, & info
+* [broken link] http://metalab.unc.edu/LDP/HOWTO/mini/Firewall-Piercing.html which is a good introduction to firewall piercing.  It also has
+describes one way to use httptunnel.
+* http://neophob.com/2006/10/gnu-httptunnel-v33-windows-binaries/ - httptunnel Win32 binaries
