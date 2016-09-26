@@ -49,14 +49,14 @@ order:
 
 Having said that, here's a (probably outdated) example:  
  * At host REMOTE, start hts like this:  
-   `hts -F localhost:23 8888`  
+   `hts -F localhost:23 8888` (set up httptunnel server to listen on port 8888 and forward to localhost:23)  
  * At host LOCAL, start htc like this:  
-   `htc -F 2323 -P PROXY:8000 REMOTE:8888`  
+   `htc -F 2323 -P PROXY_ADDRESS:8000 REMOTE_IP:8888` (set up httptunnel client to forward localhost:2323 to REMOTE_IP:8888 via a local proxy at PROXY_ADDRESS:8000)  
  * or, if using a buffering HTTP proxy:  
-   `htc -F 2323 -P PROXY:8000 -B 48K REMOTE:8888`  
+   `htc -F 2323 -P PROXY_ADDRESS:8000 -B 48K REMOTE_IP:8888`  
   * Now you can do this at host LOCAL:  
-    `telnet localhost 2323`  
-    and you will hopefully get a login prompt from host REMOTE.  
+    `telnet localhost 2323` (telnet in to REMOTE_IP:8888 via your httptunnel you just configured above on port localhost:2323)
+    ...and you will hopefully get a login prompt from host REMOTE_IP.  
 
 #See also:  
 
