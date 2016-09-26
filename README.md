@@ -47,18 +47,20 @@ order:
  3. FAQ  
  4. README  
 
-Having said that, here's a (probably outdated) example:  
- * At host REMOTE, start hts like this:  
-   `hts -F localhost:23 8888` (set up httptunnel server to listen on port 8888 and forward to localhost:23)  
- * At host LOCAL, start htc like this:  
-   `htc -F 2323 -P PROXY_ADDRESS:8000 REMOTE_IP:8888` (set up httptunnel client to forward localhost:2323 to REMOTE_IP:8888 via a local proxy at PROXY_ADDRESS:8000)  
- * or, if using a buffering HTTP proxy:  
-   `htc -F 2323 -P PROXY_ADDRESS:8000 -B 48K REMOTE_IP:8888`  
+Having said that, here's a (possibly outdated) example:  
+ * start httptunnel server:  
+  * At host REMOTE, start `hts` like this:  
+    `hts -F localhost:23 8888` (set up httptunnel server to listen on port 8888 and forward to localhost:23)   
+ * start httptunnel client:  
+   * At host LOCAL, start `htc` like this:  
+    `htc -F 2323 -P PROXY_ADDRESS:8000 REMOTE_IP:8888` (set up httptunnel client to forward localhost:2323 to REMOTE_IP:8888 via a local proxy at PROXY_ADDRESS:8000) 
+  * or, if using a buffering HTTP proxy:  
+    `htc -F 2323 -P PROXY_ADDRESS:8000 -B 48K REMOTE_IP:8888`  
   * Now you can do this at host LOCAL:  
     `telnet localhost 2323` (telnet in to REMOTE_IP:8888 via your httptunnel you just configured above on port localhost:2323)
     ...and you will hopefully get a login prompt from host REMOTE_IP.  
 
-#See also:  
+#External help, examples, & links:  
 
  * https://sergvergara.files.wordpress.com/2011/04/http_tunnel.pdf - excellent httptunnel tutorial, examples, & info
  * http://sebsauvage.net/punching/ - another excellent example
