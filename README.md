@@ -62,7 +62,7 @@ Having said that, here are some examples:
  * Debugging:
   * For debug output, add `-Dn` to the end of a command, where `n` is the level of debug output you'd like to see, with 0 meaning no
 	debug messages at all, and 5 being the highest level (verbose).  
-  * ex: `htc -F 10001 -P PROXY_ADDRESS:8000 REMOTE_IP:8888 -D5` will show verbose debug output while setting up an httptunnel client to forward localhost:10001 to REMOTE_IP:8888 via a local proxy at PROXY_ADDRESS:8000
+  * ex: `htc -F 10001 -P PROXY_ADDRESS:8000 REMOTE_IP:8888 -D5` will show verbose debug output (level 5 debugging) while setting up an httptunnel client to forward localhost:10001 to REMOTE_IP:8888 via a local proxy at PROXY_ADDRESS:8000
 
 #External help, examples, & links
 
