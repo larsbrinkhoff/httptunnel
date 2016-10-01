@@ -47,7 +47,7 @@ order:
  3. FAQ  
  4. README  
 
-Having said that, here's a (possibly outdated) example:  
+Having said that, here are some examples:  
  * start httptunnel server:  
   * At host REMOTE, start `hts` like this:  
     `hts -F localhost:23 8888` (set up httptunnel server to listen on port 8888 and forward to localhost:23)   
@@ -59,6 +59,10 @@ Having said that, here's a (possibly outdated) example:
   * Now you can do this at host LOCAL:  
     `telnet localhost 2323` (telnet in to REMOTE_IP:8888 via your httptunnel you just configured above on port localhost:2323)  
     ...and you will hopefully get a login prompt from host REMOTE_IP.  
+ * Debugging:
+  * For debug output, add `-Dn` to the end of a command, where `n` is the level of debug output you'd like to see, with 0 meaning no
+	debug messages at all, and 5 being the highest level (verbose).  
+  * ex: `htc -F 10001 -P PROXY_ADDRESS:8000 REMOTE_IP:8888 -D5` will show verbose debug output while setting up an httptunnel client to forward localhost:10001 to REMOTE_IP:8888 via a local proxy at PROXY_ADDRESS:8000
 
 #External help, examples, & links
 
