@@ -7,6 +7,9 @@ hts
 Makefile
 Makefile.in
 aclocal.m4
+compile
+install-sh
+missing
 autom4te.cache
 stamp-h1
 config.h

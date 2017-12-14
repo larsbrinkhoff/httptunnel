@@ -1,8 +1,9 @@
 dnl Copyright (C) Lars Brinkhoff.
 
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(tunnel.c)
-AM_INIT_AUTOMAKE(httptunnel, 3.3.cvs)
+AC_INIT([GNU httptunnel], [3.3.git])
+AC_CONFIG_SRCDIR([tunnel.c])
+AM_INIT_AUTOMAKE
 AM_CONFIG_HEADER(config.h)
 
 AM_CONDITIONAL(SRCDIR, test "x$srcdir" != x.)
@@ -27,8 +28,8 @@ AC_PROG_LN_S
 AC_PROG_RANLIB
 
 dnl Checks for libraries.
-AC_CHECK_FUNC(gethostent, , AC_CHECK_LIB(nsl, gethostent))
-AC_CHECK_FUNC(setsockopt, , AC_CHECK_LIB(socket, setsockopt))
+AC_CHECK_FUNC([gethostent], :, [AC_CHECK_LIB(nsl, gethostent)])
+AC_CHECK_FUNC([setsockopt], :, [AC_CHECK_LIB(socket, setsockopt)])
 
 dnl Checks for header files.
 AC_HEADER_STDC
