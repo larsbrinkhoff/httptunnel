@@ -41,6 +41,7 @@ typedef struct
   int max_connection_age;
   char *proxy_authorization;
   char *user_agent;
+  const char *base_uri;
 } Arguments;
 
 #define NO_PROXY_BUFFER 0
@@ -84,13 +85,15 @@ usage (FILE *f, const char *me)
 "  -T, --timeout TIME             timeout, in milliseconds, before sending\n"
 "                                 padding to a buffering proxy\n"
 "  -U, --user-agent STRING        specify User-Agent value in HTTP requests\n"
+"  -R, --base-uri STRING          specify a URI value for all HTTP requests\n"
+"                                 (default is \"%s\")\n"
 "  -V, --version                  output version information and exit\n"
 "  -w, --no-daemon                don't fork into the background\n"
 "\n"
 "Report bugs to %s.\n",
 	   me, DEFAULT_HOST_PORT, DEFAULT_KEEP_ALIVE,
 	   DEFAULT_MAX_CONNECTION_AGE, DEFAULT_PROXY_PORT,
-	   BUG_REPORT_EMAIL);
+	   DEFAULT_BASE_URI, BUG_REPORT_EMAIL);
 }
 
 static int
@@ -132,6 +135,7 @@ parse_arguments (int argc, char **argv, Arguments *arg)
   arg->max_connection_age = DEFAULT_CONNECTION_MAX_TIME;
   arg->proxy_authorization = NULL;
   arg->user_agent = NULL;
+  arg->base_uri = DEFAULT_BASE_URI;
 
   for (;;)
     {
@@ -151,6 +155,7 @@ parse_arguments (int argc, char **argv, Arguments *arg)
 	{ "timeout", required_argument, 0, 'T' },
 	{ "keep-alive", required_argument, 0, 'k' },
 	{ "user-agent", required_argument, 0, 'U' },
+	{ "base-uri", required_argument, 0, 'R' },
 	{ "forward-port", required_argument, 0, 'F' },
 	{ "content-length", required_argument, 0, 'c' },
 	{ "strict-content-length", no_argument, 0, 'S' },
@@ -161,7 +166,7 @@ parse_arguments (int argc, char **argv, Arguments *arg)
 	{ 0, 0, 0, 0 }
       };
 
-      static const char *short_options = "A:B:c:d:F:hk:M:P:sST:U:Vwz:"
+      static const char *short_options = "A:B:c:d:F:hk:M:P:sST:U:R:Vwz:"
 #ifdef DEBUG_MODE
 	"D:l:"
 #endif
@@ -255,6 +260,10 @@ parse_arguments (int argc, char **argv, Arguments *arg)
 
 	case 'U':
 	  arg->user_agent = optarg;
+	  break;
+
+	case 'R':
+	  arg->base_uri = optarg;
 	  break;
 
 	case 'V':
@@ -435,6 +444,7 @@ main (int argc, char **argv)
   log_notice ("  proxy_authorization = %s",
 	      arg.proxy_authorization ? arg.proxy_authorization : "(null)");
   log_notice ("  user_agent = %s", arg.user_agent ? arg.user_agent : "(null)");
+  log_notice ("  base_uri = %s", arg.base_uri ? arg.base_uri : "(null)");
   log_notice ("  debug_level = %d", debug_level);
 
 
@@ -579,6 +589,13 @@ main (int argc, char **argv)
 	{
 	  if (tunnel_setopt (tunnel, "user_agent", arg.user_agent) == -1)
 	    log_error ("tunnel_setopt user_agent error: %s",
+		       strerror (errno));
+	}
+
+	  if (arg.base_uri != NULL)
+	{
+	  if (tunnel_setopt (tunnel, "base_uri", (void *)arg.base_uri) == -1)
+	    log_error ("tunnel_setopt base_uri error: %s",
 		       strerror (errno));
 	}
 

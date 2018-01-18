@@ -91,6 +91,12 @@ int tunnel_getopt (Tunnel *tunnel, const char *opt, void *data);
     copied into a newly malloced memory region which the caller must
     accept responsibility to manage.
 
+  * base_uri
+
+    DATA must be a pointer to a char pointer.  The char pointer
+    specifies the base URI for every tunnel requests/responses.  When
+    this option is not set, the default value is used.
+
 int tunnel_close (Tunnel *tunnel);
 
   Close the tunnel.

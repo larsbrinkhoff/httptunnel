@@ -27,6 +27,7 @@ Copyright (C) 1999 Lars Brinkhoff.  See COPYING for terms and conditions.
 #define DEFAULT_CONTENT_LENGTH (100 * 1024) /* bytes */
 #define DEFAULT_KEEP_ALIVE 5 /* seconds */
 #define DEFAULT_MAX_CONNECTION_AGE 300 /* seconds */
+#define DEFAULT_BASE_URI "/index.html?crap="
 #define BUG_REPORT_EMAIL "bug-httptunnel@gnu.org"
 
 #ifndef TRUE
