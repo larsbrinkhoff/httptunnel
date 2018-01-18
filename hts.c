@@ -298,7 +298,7 @@ main (int argc, char **argv)
   Arguments arg;
   Tunnel *tunnel;
   FILE *pid_file;
-  uid_t uid;
+  uid_t uid = 0;
   gid_t gid;
 
   parse_arguments (argc, argv, &arg);

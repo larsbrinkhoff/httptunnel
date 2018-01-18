@@ -1322,6 +1322,7 @@ tunnel_new_client (const char *host, int host_port,
   tunnel->dest.proxy_port = proxy_port;
   tunnel->dest.proxy_authorization = NULL;
   tunnel->dest.user_agent = NULL;
+  tunnel->dest.base_uri = NULL;
   /* -1 to allow for TUNNEL_DISCONNECT */
   tunnel->content_length = content_length - 1;
   tunnel->buf_ptr = tunnel->buf;
@@ -1362,6 +1363,15 @@ tunnel_destroy (Tunnel *tunnel)
 
   if (tunnel->server_socket != -1)
     close (tunnel->server_socket);
+
+  if (tunnel->dest.proxy_authorization)
+    free ((char *)tunnel->dest.proxy_authorization);
+
+  if (tunnel->dest.user_agent)
+    free ((char *)tunnel->dest.user_agent);
+
+  if (tunnel->dest.base_uri)
+    free ((char *)tunnel->dest.base_uri);
 
   free (tunnel);
 }
@@ -1423,6 +1433,24 @@ tunnel_opt (Tunnel *tunnel, const char *opt, void *data, int get_flag)
 	    free ((char *)tunnel->dest.user_agent);
 	  tunnel->dest.user_agent = strdup ((char *)data);
 	  if (tunnel->dest.user_agent == NULL)
+	    return -1;
+	}
+    }
+  else if (strcmp (opt, "base_uri") == 0)
+    {
+      if (get_flag)
+	{
+	  if (tunnel->dest.base_uri == NULL)
+	    *(char **)data = NULL;
+	  else
+	    *(char **)data = strdup (tunnel->dest.base_uri);
+	}
+	  else
+	{
+	  if (tunnel->dest.base_uri != NULL)
+	    free ((char *)tunnel->dest.base_uri);
+	  tunnel->dest.base_uri = strdup ((char *)data);
+	  if (tunnel->dest.base_uri == NULL)
 	    return -1;
 	}
     }

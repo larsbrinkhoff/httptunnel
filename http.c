@@ -31,7 +31,7 @@ http_method (int fd, Http_destination *dest,
   n = 0;
   if (dest->proxy_name != NULL)
     n = sprintf (str, "http://%s:%d", dest->host_name, dest->host_port);
-  sprintf (str + n, "/index.html?crap=%ld", time (NULL));
+  sprintf (str + n, "%s%ld", dest->base_uri, time (NULL));
 
   request = http_create_request (method, str, 1, 1);
   if (request == NULL)
