@@ -18,7 +18,7 @@ static inline ssize_t
 http_method (int fd, Http_destination *dest,
 	     Http_method method, ssize_t length)
 {
-  char str[1024]; /* FIXME: possible buffer overflow */
+  char str[1024];
   Http_request *request;
   ssize_t n;
 
@@ -28,21 +28,21 @@ http_method (int fd, Http_destination *dest,
       return -1;
     }
 
-  n = 0;
-  if (dest->proxy_name != NULL)
-    n = sprintf (str, "http://%s:%d", dest->host_name, dest->host_port);
-  sprintf (str + n, "%s%ld", dest->base_uri, time (NULL));
+  if (dest->proxy_name == NULL)
+    snprintf (str, sizeof(str), "%s:%ld", dest->base_uri, time (NULL));
+  else
+    snprintf (str, sizeof(str), "http://%s:%d%s%ld", dest->host_name, dest->host_port, dest->base_uri, time (NULL));
 
   request = http_create_request (method, str, 1, 1);
   if (request == NULL)
     return -1;
 
-  sprintf (str, "%s:%d", dest->host_name, dest->host_port);
+  snprintf (str, sizeof(str), "%s:%d", dest->host_name, dest->host_port);
   http_add_header (&request->header, "Host", str);
 
   if (length >= 0)
     {
-      sprintf (str, "%ld", length);
+      snprintf (str, sizeof(str), "%ld", length);
       http_add_header (&request->header, "Content-Length", str);
     }
 
@@ -740,11 +740,11 @@ http_parse_request (int fd, Http_request **request_)
 ssize_t
 http_write_request (int fd, Http_request *request)
 {
-  char str[1024]; /* FIXME: buffer overflow */
+  char str[1024];
   ssize_t n = 0;
   size_t m;
-  
-  m = sprintf (str, "%s %s HTTP/%d.%d\r\n",
+
+  m = snprintf (str, sizeof(str), "%s %s HTTP/%d.%d\r\n",
 	       http_method_to_string (request->method),
 	       request->uri,
 	       request->major_version,

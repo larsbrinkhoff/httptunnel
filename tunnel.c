@@ -1168,7 +1168,7 @@ tunnel_accept (Tunnel *tunnel)
 
 	      tunnel_out_setsockopts (tunnel->out_fd);
 
-	      sprintf (str,
+	      snprintf (str, sizeof(str),
 "HTTP/1.1 200 OK\r\n"
 /* "Date: %s\r\n" */
 /* "Server: %s\r\n" */
