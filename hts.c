@@ -520,7 +520,7 @@ main (int argc, char **argv)
 	  int timeout;
 	  time_t t;
 	  int n;
-      
+
 	  pollfd[0].fd = fd;
 	  pollfd[0].events = POLLIN;
 	  pollfd[1].fd = tunnel_pollin_fd (tunnel);
@@ -564,11 +564,11 @@ main (int argc, char **argv)
           close (fd);
 	}
       tunnel_close (tunnel);
-      log_notice ("disconnected from FIXME:hostname:port");
+      log_notice ("disconnected from %s:%s", arg.forward_host, arg.forward_port);
     }
 
   log_debug ("destroying tunnel");
   tunnel_destroy (tunnel);
- 
+
   log_exit (0);
 }
