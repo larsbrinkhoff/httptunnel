@@ -3,7 +3,7 @@ Q: I'm not real sure what httptunnel can be used for exactly?
 A: It's a generic tool for sending data in and out through an HTTP proxy.
    This is not very useful in itself, so you must run another program
    which uses this data "tunnel".  For example, you could use telnet
-   to log in on a computer ouside the proxy.
+   to log in on a computer outside the proxy.
 
 Q: How do I get this going through a proxy?
 
@@ -22,7 +22,7 @@ A: On the server you must run hts. If I wanted to have port
    to port 80 on the proxy server and on to port 80 of the
    server, then to port 23.           
 
-Q: httptunnel craches my SuSE 5.3 box, why?
+Q: httptunnel crashes my SuSE 5.3 box, why?
 
 A: I don't know, but upgrading to 6.0 seems to help.
 
@@ -52,7 +52,7 @@ Q: Are there binaries of httptunnel for win32(Windows/95/98/NT) anywhere?
 A: On the homepage, there is a link to someone maintaining
    win32 binaries.
 
-Q: Is there a Macintoch version?
+Q: Is there a Macintosh version?
 
 A: Not that I know of.
 
@@ -98,11 +98,11 @@ Q: On LOCAL (dhcp-XXX.enea.se) I do:
    telnet: Unable to connect to remote host: Connection refused
 
 A: [Christian Brideau] http://internwebb/proxy2.pac:8000 is not
-   exactly the proxy's adress.  This is the location of the
-   Proxy-Auto-Configure (PAC) file.  This file contains the adress of
-   the proxy server.  To discover the real adress, just go to an
+   exactly the proxy's address.  This is the location of the
+   Proxy-Auto-Configure (PAC) file.  This file contains the address of
+   the proxy server.  To discover the real address, just go to an
    external web page using a browser and then use netstat to figure
-   out what adress your browser is using.
+   out what address your browser is using.
 
 Q: Why does 'configure' fail on HP-UX?
 
@@ -201,5 +201,5 @@ Q: Why do I keep getting errors like the ones listed below in my
 A: HTTP 503 is the standard HTTP error that means "Service
    Unavailable."  In this case, it means that the htc client cannot
    connect to the server.  In the example above, the hts program had
-   not yet been started on ther server side, but the same error might
+   not yet been started on their server side, but the same error might
    indicate other types of network or server errors.
