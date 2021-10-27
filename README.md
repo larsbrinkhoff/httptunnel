@@ -14,7 +14,7 @@ This program is mostly intended for technically-oriented users.
 They should know what to do.  
 
 # Install
-Read INSTALL for instructions on how to build a released version.  
+Read [INSTALL](./INSTALL) for instructions on how to build a released version.  
 If you build the development repository, run `./autogen.sh` first.  
 
 # License
@@ -32,8 +32,8 @@ Information and/or latest release should be available from these places:
 
 I take no responsibility for what you do with this software.  It has  
 the potential to do dangerous things, like disabling the protection  
-you system administrator has set up for the local network.  Read the  
-DISCLAIMER file.  
+your system administrator has set up for the local network.  Read the  
+[DISCLAIMER file](./DISCLAIMER).  
 
 # Usage & Documentation
 There are two programs: `hts` and `htc`.  `hts` is the *httptunnel server*  
