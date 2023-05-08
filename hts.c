@@ -564,7 +564,7 @@ main (int argc, char **argv)
           close (fd);
 	}
       tunnel_close (tunnel);
-      log_notice ("disconnected from %s:%s", arg.forward_host, arg.forward_port);
+      log_notice ("disconnected from %s:%d", arg.forward_host, arg.forward_port);
     }
 
   log_debug ("destroying tunnel");
